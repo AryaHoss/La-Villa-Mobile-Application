@@ -1,0 +1,138 @@
+{
+  "project_info": {
+    "project_number": "586953406232",
+    "firebase_url": "https://la-villa-f2d91.firebaseio.com",
+    "project_id": "la-villa-f2d91",
+    "storage_bucket": "la-villa-f2d91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586953406232:android:f87d15132bf9c3e43bd06d",
+        "android_client_info": {
+          "package_name": "com.example.myapplication1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "586953406232-oagt42blel2loa28s89g31p4c3qfqqvk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication1",
+            "certificate_hash": "797fc760ed62347c909f79e8e2bbfe0e9d3895a2"
+          }
+        },
+        {
+          "client_id": "586953406232-bujf9ptvd4anv2oo3qtq1scpcslp9507.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAJYpCinNeOEoNAKA9cv0_pAc9ywHDiqk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "586953406232-bujf9ptvd4anv2oo3qtq1scpcslp9507.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586953406232:android:b7543c2ddca1cb583bd06d",
+        "android_client_info": {
+          "package_name": "com.example.tester"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "586953406232-rr3r6vffdn32lpm5egt68qr88r1ufaku.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tester",
+            "certificate_hash": "1e73e1323ee7ba32238278723ac92008346ac2ab"
+          }
+        },
+        {
+          "client_id": "586953406232-bujf9ptvd4anv2oo3qtq1scpcslp9507.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAJYpCinNeOEoNAKA9cv0_pAc9ywHDiqk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "586953406232-bujf9ptvd4anv2oo3qtq1scpcslp9507.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586953406232:android:e0b080c9c5bc4ddc3bd06d",
+        "android_client_info": {
+          "package_name": "edu.csulb.cecs.lavilla"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "586953406232-jbjboka0kc31qcojvku5tisrs1ckl48m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.csulb.cecs.lavilla",
+            "certificate_hash": "6ab3dc77398cdc64c550f94d03131e1b04aec139"
+          }
+        },
+        {
+          "client_id": "586953406232-c5l378h3lmntsvkg81h13g24u9hq7bm6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.csulb.cecs.lavilla",
+            "certificate_hash": "884b6eff5011bfe48124a244d8142a2bc8e2eb41"
+          }
+        },
+        {
+          "client_id": "586953406232-a25s9o5nr57lm3hchuqp3f9q1lkstna5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.csulb.cecs.lavilla",
+            "certificate_hash": "0a1800d5e1f244a790ddd026763d08fb4c4e45c9"
+          }
+        },
+        {
+          "client_id": "586953406232-bujf9ptvd4anv2oo3qtq1scpcslp9507.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAJYpCinNeOEoNAKA9cv0_pAc9ywHDiqk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "586953406232-bujf9ptvd4anv2oo3qtq1scpcslp9507.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
