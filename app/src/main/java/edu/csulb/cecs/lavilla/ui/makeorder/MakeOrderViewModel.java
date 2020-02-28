@@ -8,6 +8,10 @@ public class MakeOrderViewModel extends ViewModel {
     private Order order;
     private Locations locations;
 
+    public MakeOrderViewModel() {
+        this.locations = locations;
+        order = new Order();
+    }
 
     public MakeOrderViewModel(Locations locations) {
         this.locations = locations;
