@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -14,11 +16,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    ViewModelMock vm = new ViewModelMock();
     public TextView rest_phone, rest_hours, rest_address,rest_name;
-
+    public RestaurantModel retrieved;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -27,23 +29,22 @@ public class MainActivity extends AppCompatActivity {
         rest_address = findViewById(R.id.rest_address);
         rest_name = findViewById(R.id.rest_name);
 
-        RestaurantModel restaurant = new RestaurantModel("1250 Bellflower Blvd\nLong Beach, CA 90840", "Mon - Fri: 10:00 to 22:00\nWeekend: Closed", "(562) 985-4111");
-        database.child("restaurants").child("001").setValue(restaurant);
-
-        DatabaseReference ref = database.child("restaurants").child("001");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        vm.fetchData(new ViewModelMock.FireBaseCallBack() {  // this interface is the one Brandon and I will be using to handle the UI
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                RestaurantModel rest = dataSnapshot.getValue(RestaurantModel.class);
-                rest_phone.setText(rest.getPhoneNumber());
-                rest_hours.setText(rest.getHours());
-                rest_address.setText(rest.getAddress());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            public void saveDataInterfaceMethod(RestaurantModel rm, RestaurantModel dest) {
+                dest = rm;
+                System.out.println(rm.toString());
+                rest_phone.setText(rm.getPhoneNumber());
+                rest_hours.setText(rm.getHours());
+                rest_address.setText(rm.getAddress());
             }
         });
+
     }
+
+
+
+
+
+
 }

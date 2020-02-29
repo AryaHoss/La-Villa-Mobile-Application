@@ -47,4 +47,9 @@ public class RestaurantModel {
         this.phoneNumber = phoneNumber;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return "Location: "+this.getAddress() +"\nHours: " +this.getHours()+ "\n phone Number:" + this.getPhoneNumber();
+    }
 }
