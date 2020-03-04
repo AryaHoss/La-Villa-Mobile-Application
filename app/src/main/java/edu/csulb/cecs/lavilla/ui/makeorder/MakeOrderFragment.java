@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import edu.csulb.cecs.lavilla.R;
+import edu.csulb.cecs.lavilla.ui.makeorder.Data.Location;
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Order;
 
 public class MakeOrderFragment extends Fragment {
@@ -45,7 +46,7 @@ public class MakeOrderFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mViewModel = new  ViewModelProvider(getActivity()).get(MakeOrderViewModel.class);
-
+        mViewModel.getOrder().printOrder();
         Button deliveryButton =  view.findViewById(R.id.delivery_button);
         deliveryButton.setOnClickListener( new View.OnClickListener() {
             @Override

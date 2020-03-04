@@ -3,38 +3,6 @@ package edu.csulb.cecs.lavilla.ui.makeorder.Data;
 import java.util.ArrayList;
 
 public class Locations {
-    public class Location{
-        private int locationId;
-        private String street;
-        private String city;
-        private int zip;
-
-        public Location() {
-        }
-
-        public Location(int locationId, String street, String city, int zip) {
-            this.locationId = locationId;
-            this.street = street;
-            this.city = city;
-            this.zip = zip;
-        }
-
-        public int getLocationId() {
-            return locationId;
-        }
-
-        public String getStreet() {
-            return street;
-        }
-
-        public String getCity() {
-            return city;
-        }
-
-        public int getZip() {
-            return zip;
-        }
-    }
 
     private ArrayList<Location> locations;
     public Locations(){
@@ -52,6 +20,10 @@ public class Locations {
                 return loc;
         }
         return null;
+    }
+
+    public ArrayList<Location> getLocations() {
+        return locations;
     }
 
     private void createLocations(){

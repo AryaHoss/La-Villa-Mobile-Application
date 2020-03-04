@@ -11,6 +11,7 @@ public class MakeOrderViewModel extends ViewModel {
     public MakeOrderViewModel() {
         this.locations = locations;
         order = new Order();
+        order.createFakeOrder();
     }
 
     public MakeOrderViewModel(Locations locations) {
@@ -18,7 +19,13 @@ public class MakeOrderViewModel extends ViewModel {
         order = new Order();
     }
 
+    public Order getOrder(){ return order; }
+
     public void setOrderType(Order.OrderType orderType){
         order.setOrderType(orderType);
+    }
+
+    public void setLocation (Location location){
+        getOrder().setOrderLocation(location);
     }
 }
