@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MakeOrderLocations">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="399dp"
+        android:layout_height="198dp"
+        android:gravity="center"
+        android:lineSpacingExtra="30sp"
+
+        android:text="Pick a location "
+        android:textAllCaps="true"
+        android:textColor="#852222"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:fontFamily="@font/architects_daughter" />
+
+    <ListView
+        android:id="@+id/makeorder_locatioms"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="200dp"
+        android:text="@+id/locations_listview" />
+
+</RelativeLayout>
