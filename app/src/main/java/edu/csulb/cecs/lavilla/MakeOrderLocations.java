@@ -25,8 +25,6 @@ import edu.csulb.cecs.lavilla.ui.makeorder.MakeOrderViewModel;
 
 public class MakeOrderLocations extends Fragment {
     ListView locationsListView;
-    ArrayAdapter<String> adapter;
-    String[] data = {"data0","data1", "data2", "data3", "data4", "data5", "data6"};
     ArrayList<Location> locations;
     LocationsAdapter locationsAdapter ;
     MakeOrderViewModel  mViewModel;

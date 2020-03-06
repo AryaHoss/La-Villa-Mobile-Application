@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100"
+
+    >
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="15"
+        android:text="itemName" />
+
+    <TextView
+        android:id="@+id/item_price"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="40"
+        android:inputType="number"
+        android:text="0.0" />
+
+    <TextView
+        android:id="@+id/item_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:inputType="number"
+        android:layout_weight="40"
+        android:text="0" />
+</LinearLayout>
