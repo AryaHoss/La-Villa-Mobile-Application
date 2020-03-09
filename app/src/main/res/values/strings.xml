@@ -11,4 +11,7 @@
     <string name="single_items">Single Items</string>
     <string name="entrees">Entrees</string>
     <string name="drinks">Drinks</string>
+    <string name="itemname">itemName</string>
+    <string name="_0_0">0.0</string>
+    <string name="_0">0</string>
 </resources>

@@ -1,5 +1,8 @@
 package edu.csulb.cecs.lavilla.ui.makeorder.Data;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Item {
     private int itemId;
     private String name;
@@ -37,5 +40,7 @@ public class Item {
     public void setItemId(int itemId) {
         this.itemId = itemId;
     }
+
+    //temp function to create a list of items to display
 
 }

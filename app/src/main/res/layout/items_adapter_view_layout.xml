@@ -4,30 +4,31 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="100"
 
     >
 
     <TextView
         android:id="@+id/item_name"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_weight="15"
-        android:text="itemName" />
+        android:gravity="center"
+        android:text="@string/itemname" />
 
     <TextView
         android:id="@+id/item_price"
-        android:layout_width="match_parent"
+        android:layout_width="90dp"
         android:layout_height="40dp"
-        android:layout_weight="40"
         android:inputType="number"
-        android:text="0.0" />
+        android:gravity="center"
+
+        android:text="@string/_0_0" />
 
     <TextView
         android:id="@+id/item_quantity"
-        android:layout_width="match_parent"
+        android:layout_width="90dp"
         android:layout_height="40dp"
+        android:gravity="center"
+
         android:inputType="number"
-        android:layout_weight="40"
-        android:text="0" />
+        android:text="@string/_0" />
 </LinearLayout>
