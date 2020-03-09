@@ -11,14 +11,23 @@ public class Order{
         public enum OrderType{
             DELIVERY, PICKUP
         }
+        private int orderId;private int userId;
 
-        private int orderId;
-        private int userId;
-        private ArrayList<Item> items;
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
+    }
+
+    private ArrayList<Item> items;
         private float subtotal;
         private float total;
         private OrderType orderType;
         private Location orderLocation;
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+
 
     public Location getOrderLocation() {
         return orderLocation;
@@ -27,8 +36,6 @@ public class Order{
     public void setOrderLocation(Location orderLocation) {
         this.orderLocation = orderLocation;
     }
-
-
 
 
     public Order(ArrayList<Item> items) {

@@ -41,6 +41,15 @@ public class Item {
         this.itemId = itemId;
     }
 
+    public void incrementQty() {
+        quantity++;
+    }
+
+    public void decreaseQty(){
+        if(quantity>0)
+            quantity--;
+    }
+
     //temp function to create a list of items to display
 
 }

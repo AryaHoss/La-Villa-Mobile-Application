@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="150dp"
             android:orientation="horizontal">
 
             <Button
@@ -82,11 +82,18 @@
         </LinearLayout>
     </HorizontalScrollView>
 
+    <Button
+        android:id="@+id/goto_cart_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="50dp"
+        android:text="Go To Cart" />
+
     <ListView
+        android:id="@+id/menu_items_listview"
         android:layout_width="wrap_content"
         android:layout_height="558dp"
-        android:layout_marginTop="125dp"
-        android:id="@+id/menu_items_listview"
-        />
+        android:layout_marginTop="230dp" />
 
 </FrameLayout>
