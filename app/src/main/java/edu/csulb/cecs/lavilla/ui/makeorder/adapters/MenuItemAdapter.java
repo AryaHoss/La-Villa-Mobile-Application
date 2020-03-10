@@ -1,4 +1,4 @@
-package edu.csulb.cecs.lavilla;
+package edu.csulb.cecs.lavilla.ui.makeorder.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.csulb.cecs.lavilla.R;
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Item;
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Location;
 
@@ -42,12 +43,12 @@ public class MenuItemAdapter extends ArrayAdapter<Item> {
 
         TextView tvItemName = (TextView) convertView.findViewById(R.id.item_name);
         TextView tvPrice = (TextView) convertView.findViewById(R.id.item_price);
-        TextView tvQuantiy = (TextView) convertView.findViewById(R.id.item_quantity);
+        TextView tvQuantity = (TextView) convertView.findViewById(R.id.item_quantity);
 
 
         tvItemName.setText(name);
         tvPrice.setText(Float.toString(price));
-        tvQuantiy.setText(Integer.toString(quantity));
+        tvQuantity.setText(Integer.toString(quantity));
         return convertView;
     }
 

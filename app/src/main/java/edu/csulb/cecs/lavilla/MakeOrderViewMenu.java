@@ -22,6 +22,7 @@ import java.util.Arrays;
 
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Item;
 import edu.csulb.cecs.lavilla.ui.makeorder.MakeOrderViewModel;
+import edu.csulb.cecs.lavilla.ui.makeorder.adapters.MenuItemAdapter;
 
 
 public class MakeOrderViewMenu extends Fragment {

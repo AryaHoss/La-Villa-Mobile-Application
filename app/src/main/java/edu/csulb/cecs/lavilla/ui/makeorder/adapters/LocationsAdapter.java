@@ -1,4 +1,4 @@
-package edu.csulb.cecs.lavilla;
+package edu.csulb.cecs.lavilla.ui.makeorder.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
+import edu.csulb.cecs.lavilla.R;
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Location;
 
 public class LocationsAdapter extends ArrayAdapter<Location>{
