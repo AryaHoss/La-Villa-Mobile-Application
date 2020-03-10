@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -26,7 +27,6 @@ import edu.csulb.cecs.lavilla.ui.makeorder.MakeOrderViewModel;
 public class MakeOrderViewMenu extends Fragment {
 
     ListView menuItemsListView;
-    ArrayList<Item> items;
     MenuItemAdapter itemsAdapter;
     MakeOrderViewModel mViewModel;
 
@@ -61,19 +61,29 @@ public class MakeOrderViewMenu extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        items = createFakeItems();
         mViewModel = new ViewModelProvider(getActivity()).get(MakeOrderViewModel.class);
-        mViewModel.getOrder().setItems(items);
+
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_make_order_view_menu, container, false);
         menuItemsListView = (ListView) view.findViewById(R.id.menu_items_listview);
 
-        itemsAdapter = new MenuItemAdapter(getContext(), R.layout.items_adapter_view_layout, items );
+        itemsAdapter = new MenuItemAdapter(getContext(), R.layout.items_adapter_view_layout,
+                mViewModel.getOrder().getItems().getValue() );
+
         menuItemsListView.setAdapter(itemsAdapter);
+        mViewModel.getOrder().getItems().observe(getActivity(), new Observer<ArrayList<Item>>() {
+            @Override
+            public void onChanged(ArrayList<Item> items) {
+                itemsAdapter = new MenuItemAdapter(getContext(), R.layout.items_adapter_view_layout, items );
+                menuItemsListView.setAdapter(itemsAdapter);
+
+            }
+        });
+
         menuItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Item itemSelected = items.get(position);
+                Item itemSelected = mViewModel.getOrder().getItems().getValue().get(position);
                 mViewModel.setItemSelected(itemSelected);
 
                 NavController navController = Navigation.findNavController(getActivity(), R.id.make_order_navHost);

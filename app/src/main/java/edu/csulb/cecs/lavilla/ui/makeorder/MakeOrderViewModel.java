@@ -39,7 +39,7 @@ public class MakeOrderViewModel extends ViewModel {
     }
 
     public void incrementItemQty() {
-        for (Item i: getOrder().getItems()) {
+        for (Item i: getOrder().getItems().getValue()) {
             if(itemSelected.getItemId() == i.getItemId()){
                 i.incrementQty();
             }
@@ -47,7 +47,7 @@ public class MakeOrderViewModel extends ViewModel {
     }
 
     public void decreaseItemQty(){
-        for (Item i: getOrder().getItems()) {
+        for (Item i: getOrder().getItems().getValue()) {
             if(itemSelected.getItemId() == i.getItemId()){
                 i.decreaseQty();
             }

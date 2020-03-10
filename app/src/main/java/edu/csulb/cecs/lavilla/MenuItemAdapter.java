@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Item;
@@ -28,14 +29,14 @@ public class MenuItemAdapter extends ArrayAdapter<Item> {
     }
 
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        String name = getItem(position).getName();
-        String description = getItem(position).getDescription();
-        float price = getItem(position).getPrice();
-        int quantity = 0;
-        int id = getItem(position).getItemId();
+        Item item = getItem(position);
+        String name = item.getName();
+        String description = item.getDescription();
+        float price = item.getPrice();
+        int quantity = item.getQuantity();
+        int id = item.getItemId();
 
         //create the location with this info
-        Item item = new Item(id, name, description, price, quantity);
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(resource, parent, false);
 
@@ -46,8 +47,10 @@ public class MenuItemAdapter extends ArrayAdapter<Item> {
 
         tvItemName.setText(name);
         tvPrice.setText(Float.toString(price));
-        tvQuantiy.setText(Integer.toString(0));
+        tvQuantiy.setText(Integer.toString(quantity));
         return convertView;
     }
+
+
 
 }

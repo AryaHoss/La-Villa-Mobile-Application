@@ -84,6 +84,7 @@ public class ItemView extends Fragment implements View.OnClickListener {
             case R.id.plus_btn:{
                 mViewModel.incrementItemQty();
                 etItemQty.setText(Integer.toString(mViewModel.getItemSelected().getQuantity()));
+                mViewModel.getOrder().getItems().setValue(mViewModel.getOrder().getItems().getValue());
                 mViewModel.getItemSelected();
                 break;
             }
