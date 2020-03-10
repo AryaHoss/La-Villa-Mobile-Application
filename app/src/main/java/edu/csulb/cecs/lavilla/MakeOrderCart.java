@@ -40,8 +40,9 @@ public class MakeOrderCart extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_make_order_cart, container, false);
         mViewModel = new ViewModelProvider(getActivity()).get(MakeOrderViewModel.class);
-        //cartListView = (ListView) view.findViewById()
-
+        cartListView = (ListView) view.findViewById(R.id.cart_listview);
+        cartAdapter = new CartAdapter(getContext(), R.layout.cart_adapter_view_layout, mViewModel.getOrder().getPickedItems());
+        cartListView.setAdapter(cartAdapter);
         return view;
     }
 

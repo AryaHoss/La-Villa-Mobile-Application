@@ -107,4 +107,13 @@ public class Order{
                 addItem(i);
             }
         }
+
+        public ArrayList<Item> getPickedItems(){
+            ArrayList<Item> ordered = new ArrayList<>();
+            for (Item i: items.getValue()) {
+                if(i.getQuantity()>0)
+                    ordered.add(i);
+            }
+            return ordered;
+        }
     }
