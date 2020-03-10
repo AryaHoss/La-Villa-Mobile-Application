@@ -1,15 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MakeOrderCart">
 
+
+    <TextView
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:gravity="center"
+        android:text="Your Cart "
+        android:textColor="#A64242"
+        android:textSize="40dp"
+        android:textStyle="italic" />
     <!-- TODO: Update blank fragment layout -->
     <ListView
         android:id="@+id/cart_listview"
         android:layout_width="match_parent"
         android:layout_height="536dp"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="30dp" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="93dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="118dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:text="Total"
+            android:textSize="30dp"></TextView>
+
+        <TextView
+            android:id="@+id/order_total"
+            android:layout_width="wrap_content"
+            android:layout_height="93dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="right"
+            android:inputType="number"
+            android:text="order_total"
+            android:textSize="35dp" />
+    </LinearLayout>
+
+
+</LinearLayout>

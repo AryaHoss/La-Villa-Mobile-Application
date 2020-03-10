@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import edu.csulb.cecs.lavilla.ui.makeorder.MakeOrderViewModel;
 import edu.csulb.cecs.lavilla.ui.makeorder.adapters.CartAdapter;
@@ -43,6 +44,8 @@ public class MakeOrderCart extends Fragment {
         cartListView = (ListView) view.findViewById(R.id.cart_listview);
         cartAdapter = new CartAdapter(getContext(), R.layout.cart_adapter_view_layout, mViewModel.getOrder().getPickedItems());
         cartListView.setAdapter(cartAdapter);
+        TextView tvOrderTotal = view.findViewById(R.id.order_total);
+        tvOrderTotal.setText("$ "+Float.toString(mViewModel.getOrder().getTotal()));
         return view;
     }
 
