@@ -57,6 +57,10 @@ public class Order{
         }
 
         public float getTotal() {
+            total =0;
+            for (Item i : getPickedItems()){
+                total += i.getPrice() * i.getQuantity();
+                }
             return total;
         }
 

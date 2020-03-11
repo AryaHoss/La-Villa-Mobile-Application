@@ -6,10 +6,13 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,6 +25,7 @@ public class MakeOrderCart extends Fragment {
     ListView cartListView;
     MakeOrderViewModel mViewModel;
     CartAdapter cartAdapter;
+    Button paybtn;
 
     public MakeOrderCart() {
         // Required empty public constructor
@@ -46,6 +50,16 @@ public class MakeOrderCart extends Fragment {
         cartListView.setAdapter(cartAdapter);
         TextView tvOrderTotal = view.findViewById(R.id.order_total);
         tvOrderTotal.setText("$ "+Float.toString(mViewModel.getOrder().getTotal()));
+        paybtn = view.findViewById(R.id.pay_btn);
+        paybtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Todo check whether user has payment method and implement logic
+
+                NavController  nController = Navigation.findNavController(getActivity(), R.id.make_order_navHost);
+                nController.navigate(R.id.action_makeOrderCart_to_makeOrderSubmited);
+            }
+        });
         return view;
     }
 
