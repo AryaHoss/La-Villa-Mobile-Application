@@ -1,21 +1,20 @@
 package edu.csulb.cecs.lavilla.ui.makeorder.Data;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Item {
     private int itemId;
     private String name;
     private String description;
     private float price;
     private int quantity;
+    private boolean locationId;
 
-    public Item(int itemId, String name, String description, float price, int quantity) {
+    public Item(int itemId, String name, String description, float price, int quantity, boolean locationId) {
         this.itemId = itemId;
         this.name = name;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
+        this.locationId = locationId;
     }
 
     public String getName(){
@@ -41,15 +40,7 @@ public class Item {
         this.itemId = itemId;
     }
 
-    public void incrementQty() {
-        quantity++;
+    public boolean isLocationId() {
+        return locationId;
     }
-
-    public void decreaseQty(){
-        if(quantity>0)
-            quantity--;
-    }
-
-    //temp function to create a list of items to display
-
 }

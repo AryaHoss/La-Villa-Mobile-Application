@@ -1,7 +1,14 @@
 package edu.csulb.cecs.lavilla.ui.makeorder;
 
+import android.util.Log;
+
 import androidx.lifecycle.ViewModel;
+
+import java.util.ArrayList;
+
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.*;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class MakeOrderViewModel extends ViewModel {
     // TODO: Implement the ViewModel
@@ -52,5 +59,25 @@ public class MakeOrderViewModel extends ViewModel {
                 i.decreaseQty();
             }
         }
+    }
+
+    public void readData(){
+       FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();//firebase root reference to database
+       firebaseRootRef = firebaseDatabase.getReference();
+       MenuRef = firebaseRootRef.child("Menu");
+       MenuList = new ArrayList<>();
+
+       Log.d(TAG, "Before attaching the listener");
+        ValueEventListener valueEventListener = new ValueEventListener(){
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot){
+                Log.d(TAG, "Inside onDatachange() method");
+
+                for (DataSnapShot ds : dataSnapshot.getChildren()){
+                    String item
+                }
+            }
+        }
+
     }
 }
