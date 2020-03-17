@@ -74,7 +74,7 @@ public class MakeOrderViewModel extends ViewModel {
                 Log.d(TAG, "Inside onDatachange() method");
 
                 for (DataSnapShot ds : dataSnapshot.getChildren()){
-                    String item
+                    String item;
                 }
             }
         }
