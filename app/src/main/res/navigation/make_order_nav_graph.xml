@@ -13,7 +13,11 @@
         tools:layout="@layout/fragment_make_order_cart" >
         <action
             android:id="@+id/action_makeOrderCart_to_makeOrderSubmited"
-            app:destination="@id/makeOrderSubmited" />
+            app:destination="@id/makeOrderSubmited"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/makeOrderLocations"
@@ -22,7 +26,11 @@
         tools:layout="@layout/fragment_make_order_locations" >
         <action
             android:id="@+id/action_makeOrderLocations_to_makeOrderViewMenu"
-            app:destination="@id/makeOrderViewMenu" />
+            app:destination="@id/makeOrderViewMenu"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/makeOrderViewMenu"
@@ -31,10 +39,18 @@
         tools:layout="@layout/fragment_make_order_view_menu" >
         <action
             android:id="@+id/action_makeOrderViewMenu_to_makeOrderCart"
-            app:destination="@id/makeOrderCart" />
+            app:destination="@id/makeOrderCart"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right"/>
         <action
             android:id="@+id/action_makeOrderViewMenu_to_itemView"
-            app:destination="@id/itemView" />
+            app:destination="@id/itemView"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/makeOrderSubmited"
@@ -48,7 +64,11 @@
         tools:layout="@layout/make_order_fragment" >
         <action
             android:id="@+id/action_makeOrderFragment_to_makeOrderLocations"
-            app:destination="@id/makeOrderLocations" />
+            app:destination="@id/makeOrderLocations"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
     </fragment>
     <fragment
         android:id="@+id/itemView"
