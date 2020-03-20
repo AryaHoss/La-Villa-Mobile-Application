@@ -69,6 +69,7 @@ public class MakeOrderLocations extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
 
 
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
