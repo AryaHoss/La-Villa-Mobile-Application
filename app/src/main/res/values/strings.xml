@@ -8,4 +8,14 @@
     <string name="pickup">PickUp</string>
     <string name="delivery">Delivery</string>
     <string name="what_do_you_want_to_do_today">What do you want to do today?</string>
+    <string name="single_items">Single Items</string>
+    <string name="entrees">Entrees</string>
+    <string name="drinks">Drinks</string>
+    <string name="itemname">itemName</string>
+    <string name="_0_0">0.0</string>
+    <string name="_0">0</string>
+    <string name="your_order_has_been_sent">Your Order Has Been Sent!</string>
+    <string name="status">Status</string>
+    <string name="statusCode">STATUS..</string>
+    <string name="network_failure">There was an error processing the payment, please check your network connection.</string>
 </resources>

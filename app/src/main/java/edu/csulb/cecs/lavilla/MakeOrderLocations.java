@@ -1,7 +1,6 @@
 package edu.csulb.cecs.lavilla;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -21,12 +19,11 @@ import java.util.ArrayList;
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Location;
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Locations;
 import edu.csulb.cecs.lavilla.ui.makeorder.MakeOrderViewModel;
+import edu.csulb.cecs.lavilla.ui.makeorder.adapters.LocationsAdapter;
 
 
 public class MakeOrderLocations extends Fragment {
     ListView locationsListView;
-    ArrayAdapter<String> adapter;
-    String[] data = {"data0","data1", "data2", "data3", "data4", "data5", "data6"};
     ArrayList<Location> locations;
     LocationsAdapter locationsAdapter ;
     MakeOrderViewModel  mViewModel;

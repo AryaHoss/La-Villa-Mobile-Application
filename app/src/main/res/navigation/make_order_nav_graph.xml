@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_makeOrderViewMenu_to_makeOrderCart"
             app:destination="@id/makeOrderCart" />
+        <action
+            android:id="@+id/action_makeOrderViewMenu_to_itemView"
+            app:destination="@id/itemView" />
     </fragment>
     <fragment
         android:id="@+id/makeOrderSubmited"
@@ -47,4 +50,10 @@
             android:id="@+id/action_makeOrderFragment_to_makeOrderLocations"
             app:destination="@id/makeOrderLocations" />
     </fragment>
+    <fragment
+        android:id="@+id/itemView"
+        android:name="edu.csulb.cecs.lavilla.ItemView"
+        android:label="fragment_make_order_item_view"
+        tools:layout="@layout/fragment_make_order_item_view" />
+
 </navigation>

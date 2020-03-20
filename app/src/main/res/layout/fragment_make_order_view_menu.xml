@@ -5,10 +5,95 @@
     android:layout_height="match_parent"
     tools:context=".MakeOrderViewMenu">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="150dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/entreess_btn"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#985C5C"
+                android:fadingEdge="horizontal|vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:shadowColor="#FFFFFF"
+                android:text="@string/entrees"
+                android:textColor="#FFFFFF"
+                android:textColorHighlight="#3B853E"
+                android:textColorLink="#2F6831" />
+
+            <Button
+                android:id="@+id/single_items_btn"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#985C5C"
+                android:fadingEdge="horizontal|vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:shadowColor="#FFFFFF"
+                android:text="@string/single_items"
+                android:textColor="#FFFFFF"
+                android:textColorHighlight="#3B853E"
+                android:textColorLink="#2F6831" />
+
+            <Button
+                android:id="@+id/breakfast_btn"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#985C5C"
+                android:fadingEdge="horizontal|vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:shadowColor="#FFFFFF"
+                android:textColor="#FFFFFF"
+                android:textColorHighlight="#3B853E"
+                android:textColorLink="#2F6831"
+                tools:text="Breakfast" />
+
+            <Button
+                android:id="@+id/drinks_btn"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#985C5C"
+                android:fadingEdge="horizontal|vertical"
+                android:shadowColor="#FFFFFF"
+                android:text="@string/drinks"
+                android:textColor="#FFFFFF"
+                android:textColorHighlight="#3B853E"
+                android:textColorLink="#2F6831" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/goto_cart_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="50dp"
+        android:text="Go To Cart" />
+
+    <ListView
+        android:id="@+id/menu_items_listview"
+        android:layout_width="wrap_content"
+        android:layout_height="558dp"
+        android:layout_marginTop="230dp" />
 
 </FrameLayout>
