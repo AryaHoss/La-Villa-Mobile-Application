@@ -1,22 +1,22 @@
 package edu.csulb.cecs.lavilla.ui.makeorder;
 
-import android.util.Log;
+        import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModel;
+        import androidx.annotation.NonNull;
+        import androidx.lifecycle.ViewModel;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+        import com.google.firebase.database.DataSnapshot;
+        import com.google.firebase.database.DatabaseError;
+        import com.google.firebase.database.DatabaseReference;
+        import com.google.firebase.database.FirebaseDatabase;
+        import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 
-import edu.csulb.cecs.lavilla.ui.makeorder.Data.*;
+        import edu.csulb.cecs.lavilla.ui.makeorder.Data.*;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
+        import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class MakeOrderViewModel extends ViewModel {
     // TODO: Implement the ViewModel
@@ -77,13 +77,13 @@ public class MakeOrderViewModel extends ViewModel {
     }
 
     public void readData(){
-       FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();//firebase root reference to database
-       firebaseRootRef = firebaseDatabase.getReference();
-       MenuRef = firebaseRootRef.child("Menu");
-       MenuList = new ArrayList<>();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();//firebase root reference to database
+        firebaseRootRef = firebaseDatabase.getReference();
+        MenuRef = firebaseRootRef.child("Menu");
+        MenuList = new ArrayList<>();
 
 
-       Log.d(TAG, "Before attaching the listener");
+        Log.d(TAG, "Before attaching the listener");
         ValueEventListener valueEventListener = new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -110,7 +110,7 @@ public class MakeOrderViewModel extends ViewModel {
 
     }
     public String printData(){
-       String strReturn = "";
+        String strReturn = "";
         for(String S: MenuList){
             strReturn += S;
         }
