@@ -96,14 +96,14 @@ public class Order{
 
 
     public void createFakeOrder(){
-            Item carneAsada = new Item(1,"Carne Asada", "Carne Asada with rice and pillo de gallo. Served with 2 flour tortillas", (float)12.99, 0);
-            Item chilaquiles = new Item(2,"Chilaquiles", "Fried chip tortillas bathed in salsa verde topped with cream, cheese and delivious eggs. Served with 2 flour tortillas", (float) 10.99, 0);
-            Item threeTacoPlate = new Item(3,"Three Tacos Plate", "3 tacos with meat of your choice, served with rice and beans ", (float)12.99, 0);
-            Item burrito = new Item(4,"Burrito", "Flour tortilla with meat of choice, rice, beans, cheese, cream and salsa verde", (float)8.99, 0);
-            Item polloAsado = new Item(5,"Pollo Asado", "Grilled chicken topped with special sauce. Comes with 1 enchilada, rice and beans. Served with 2 flour tortillas", (float)13.99, 0);
-            Item nachos = new Item(6,"Nachos", "Nachos topped with chicken or beef, cream, pico de gallo and cheese", (float)11.99, 0);
-            Item horchata = new Item(7,"Carne Asada", "Carne Asada with rice and pillo de gallo. Served with 2 flour tortillas", (float)4.99, 0);
-            Item coke = new Item(8,"Coke", "12-Ounze drink", (float)3.99, 0);
+            Item carneAsada = new Item(1,"Carne Asada", "Carne Asada with rice and pillo de gallo. Served with 2 flour tortillas", (float)12.99, 0, true);
+            Item chilaquiles = new Item(2,"Chilaquiles", "Fried chip tortillas bathed in salsa verde topped with cream, cheese and delivious eggs. Served with 2 flour tortillas", (float) 10.99, 0, true);
+            Item threeTacoPlate = new Item(3,"Three Tacos Plate", "3 tacos with meat of your choice, served with rice and beans ", (float)12.99, 0, true);
+            Item burrito = new Item(4,"Burrito", "Flour tortilla with meat of choice, rice, beans, cheese, cream and salsa verde", (float)8.99, 0, true);
+            Item polloAsado = new Item(5,"Pollo Asado", "Grilled chicken topped with special sauce. Comes with 1 enchilada, rice and beans. Served with 2 flour tortillas", (float)13.99, 0, true);
+            Item nachos = new Item(6,"Nachos", "Nachos topped with chicken or beef, cream, pico de gallo and cheese", (float)11.99, 0, true);
+            Item horchata = new Item(7,"Carne Asada", "Carne Asada with rice and pillo de gallo. Served with 2 flour tortillas", (float)4.99, 0, true);
+            Item coke = new Item(8,"Coke", "12-Ounze drink", (float)3.99, 0, true);
 
             MutableLiveData<ArrayList<Item>> orderItems = new MutableLiveData<ArrayList<Item>>();
                     orderItems.setValue( new ArrayList(Arrays.asList(carneAsada, chilaquiles, threeTacoPlate, burrito, polloAsado, nachos, horchata, coke)));

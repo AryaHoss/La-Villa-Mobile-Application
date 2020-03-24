@@ -6,15 +6,15 @@ public class Item {
     private String description;
     private float price;
     private int quantity;
-    private boolean locationId;
+    private boolean validLocation;
 
-    public Item(int itemId, String name, String description, float price, int quantity, boolean locationId) {
+    public Item(int itemId, String name, String description, float price, int quantity, boolean validLocation) {
         this.itemId = itemId;
         this.name = name;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
-        this.locationId = locationId;
+        this.validLocation = validLocation;
     }
 
     public String getName(){
@@ -40,7 +40,16 @@ public class Item {
         this.itemId = itemId;
     }
 
-    public boolean isLocationId() {
-        return locationId;
+    public boolean isValidLocation() {
+        return validLocation;
     }
+
+    public void incrementQty() {
+        this.quantity++;
+    }
+
+    public void decreaseQty() {
+        this.quantity--;
+    }
+
 }
