@@ -17,5 +17,4 @@
     <string name="your_order_has_been_sent">Your Order Has Been Sent!</string>
     <string name="status">Status</string>
     <string name="statusCode">STATUS..</string>
-    <string name="network_failure">There was an error processing the payment, please check your network connection.</string>
 </resources>
