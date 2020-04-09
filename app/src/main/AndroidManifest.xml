@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".UserHome" />
+        <activity android:name=".AdminView" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".CheckoutActivity" />
         <activity android:name=".Welcome" />
         <activity
