@@ -35,7 +35,7 @@ public class LocationsAdapter extends ArrayAdapter<Location>{
         String street = getItem(position).getStreet();
         String city = getItem(position).getCity();
         int zip = getItem(position).getZip();
-        int id = getItem(position).getLocationId();
+        String id = getItem(position).getLocationId();
 
         //create the location with this info
         Location location = new Location(id,street, city, zip);

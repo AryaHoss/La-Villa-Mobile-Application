@@ -14,7 +14,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Location;
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Locations;
@@ -38,26 +43,42 @@ public class MakeOrderLocations extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final Locations locationsList = new Locations();
-        locations = locationsList.getLocations();
-
+        LocationDataHandler locationDataHandler = new LocationDataHandler(getContext());
+        DatabaseReference h =  FirebaseDatabase.getInstance().getReference();
         mViewModel = new ViewModelProvider(getActivity()).get(MakeOrderViewModel.class);
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_make_order_locations, container, false);
         locationsListView = (ListView) view.findViewById(R.id.makeorder_locatioms);
-        locationsAdapter = new LocationsAdapter(getContext(), R.layout.locations_adapter_view_layout , locations);
-        locationsListView.setAdapter(locationsAdapter);
-        locationsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        System.out.println("calling get all locations");
+
+        locationDataHandler.getAllLocations(new LocationDataHandler.FirebaseCallBack() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Location locationSelected = locations.get(position);
-                mViewModel.setLocation(locationSelected);
+            public void getLocationMethod(Location location) { }
 
-                NavController navController = Navigation.findNavController(getActivity(), R.id.make_order_navHost);
-                navController.navigate(R.id.action_makeOrderLocations_to_makeOrderViewMenu);
+            @Override
+            public void getAllLocationMethod(List<Location> locations) {
+                System.out.println("INSIDE LOCATION METHIDS  "+locations.size());
 
+                locationsAdapter = new LocationsAdapter(getContext(), R.layout.locations_adapter_view_layout , locations);
+                locationsListView.setAdapter(locationsAdapter);
+                locationsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        Location locationSelected = locations.get(position);
+                        mViewModel.setLocation(locationSelected);
+                        NavController navController = Navigation.findNavController(getActivity(), R.id.make_order_navHost);
+                        navController.navigate(R.id.action_makeOrderLocations_to_makeOrderViewMenu);
+
+
+                    }
+                });
             }
         });
+
+
 
 
         return view;
@@ -70,6 +91,8 @@ public class MakeOrderLocations extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+
 
     }
 
