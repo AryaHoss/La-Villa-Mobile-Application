@@ -27,6 +27,7 @@ public class MakeOrderCart extends Fragment {
     CartAdapter cartAdapter;
     Button paybtn;
 
+
     public MakeOrderCart() {
         // Required empty public constructor
     }
@@ -55,7 +56,7 @@ public class MakeOrderCart extends Fragment {
             @Override
             public void onClick(View v) {
                 //Todo check whether user has payment method and implement logic
-
+                mViewModel.postOrder();
                 NavController  nController = Navigation.findNavController(getActivity(), R.id.make_order_navHost);
                 nController.navigate(R.id.action_makeOrderCart_to_makeOrderSubmited);
             }

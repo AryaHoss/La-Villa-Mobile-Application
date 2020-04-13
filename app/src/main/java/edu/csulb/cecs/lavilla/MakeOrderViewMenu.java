@@ -19,6 +19,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Item;
 import edu.csulb.cecs.lavilla.ui.makeorder.MakeOrderViewModel;
@@ -31,38 +32,18 @@ public class MakeOrderViewMenu extends Fragment {
     MenuItemAdapter itemsAdapter;
     MakeOrderViewModel mViewModel;
 
-    public ArrayList<Item> createFakeItems(){
-        Item carneAsada = new Item(1,"Carne Asada", "Carne Asada with rice and pillo de gallo. Served with 2 flour tortillas", (float)12.99, 0, true);
-        Item chilaquiles = new Item(2,"Chilaquiles", "Fried chip tortillas bathed in salsa verde topped with cream, cheese and delivious eggs. Served with 2 flour tortillas", (float) 10.99, 0, true);
-        Item threeTacoPlate = new Item(3,"Three Tacos Plate", "3 tacos with meat of your choice, served with rice and beans ", (float)12.99, 0, true);
-        Item burrito = new Item(4,"Burrito", "Flour tortilla with meat of choice, rice, beans, cheese, cream and salsa verde", (float)8.99, 0, true);
-        Item polloAsado = new Item(5,"Pollo Asado", "Grilled chicken topped with special sauce. Comes with 1 enchilada, rice and beans. Served with 2 flour tortillas", (float)13.99, 0, true);
-        Item nachos = new Item(6,"Nachos", "Nachos topped with chicken or beef, cream, pico de gallo and cheese", (float)11.99, 0, true);
-        Item horchata = new Item(7,"Carne Asada", "Carne Asada with rice and pillo de gallo. Served with 2 flour tortillas", (float)4.99, 0, true);
-        Item coke = new Item(8,"Coke", "12-Ounze drink", (float)3.99, 0, true);
-
-        ArrayList<Item> orderItems = new ArrayList(Arrays.asList(carneAsada, chilaquiles, threeTacoPlate, burrito, polloAsado, nachos, horchata, coke));
-    return orderItems;
-    }
-
-
-
     public MakeOrderViewMenu() {
         // Required empty public constructor
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mViewModel = new ViewModelProvider(getActivity()).get(MakeOrderViewModel.class);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mViewModel = new ViewModelProvider(getActivity()).get(MakeOrderViewModel.class);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_make_order_view_menu, container, false);
@@ -70,15 +51,10 @@ public class MakeOrderViewMenu extends Fragment {
 
         itemsAdapter = new MenuItemAdapter(getContext(), R.layout.items_adapter_view_layout,
                 mViewModel.getOrder().getItems().getValue() );
-
         menuItemsListView.setAdapter(itemsAdapter);
-        mViewModel.getOrder().getItems().observe(getActivity(), new Observer<ArrayList<Item>>() {
-            @Override
-            public void onChanged(ArrayList<Item> items) {
-                itemsAdapter = new MenuItemAdapter(getContext(), R.layout.items_adapter_view_layout, items );
-                menuItemsListView.setAdapter(itemsAdapter);
-
-            }
+        mViewModel.getOrder().getItems().observe(getActivity(), items -> {
+            itemsAdapter = new MenuItemAdapter(getContext(), R.layout.items_adapter_view_layout, items );
+            menuItemsListView.setAdapter(itemsAdapter);
         });
 
         menuItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -91,6 +67,7 @@ public class MakeOrderViewMenu extends Fragment {
                 navController.navigate(R.id.action_makeOrderViewMenu_to_itemView);
             }
         });
+
 
         //set button to go to cart fragment;
         Button goToCartBtn = view.findViewById(R.id.goto_cart_btn);

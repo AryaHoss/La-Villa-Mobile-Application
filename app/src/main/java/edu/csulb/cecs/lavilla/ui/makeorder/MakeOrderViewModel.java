@@ -12,8 +12,11 @@ package edu.csulb.cecs.lavilla.ui.makeorder;
         import com.google.firebase.database.ValueEventListener;
 
         import java.util.ArrayList;
+        import java.util.HashMap;
         import java.util.List;
+        import java.util.Map;
 
+        import edu.csulb.cecs.lavilla.LocationDataHandler;
         import edu.csulb.cecs.lavilla.ui.makeorder.Data.*;
 
         import static androidx.constraintlayout.widget.Constraints.TAG;
@@ -21,7 +24,7 @@ package edu.csulb.cecs.lavilla.ui.makeorder;
 public class MakeOrderViewModel extends ViewModel {
     // TODO: Implement the ViewModel
     DatabaseReference firebaseRootRef, MenuRef;
-    ArrayList<String> MenuList;
+    ArrayList<Item> MenuList;
     ValueEventListener valueEventListener;
 
     private Order order;
@@ -31,7 +34,6 @@ public class MakeOrderViewModel extends ViewModel {
     public MakeOrderViewModel() {
         this.locations = locations;
         order = new Order();
-        order.createFakeOrder();
     }
 
     public MakeOrderViewModel(Locations locations) {
@@ -57,6 +59,9 @@ public class MakeOrderViewModel extends ViewModel {
         itemSelected = item;
     }
 
+    public Location getLocationSelected(){
+        return getOrder().getOrderLocation();
+    }
     public void incrementItemQty() {
         for (Item i: getOrder().getItems().getValue()) {
             if(itemSelected.getItemId() == i.getItemId()){
@@ -76,50 +81,55 @@ public class MakeOrderViewModel extends ViewModel {
         }
     }
 
-    public void readData(){
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();//firebase root reference to database
-        firebaseRootRef = firebaseDatabase.getReference();
+    public void getMenuItens(FirebaseCallback firebaseCallBack){
+        System.out.println("FINDING ITEMS AGAIN");
+
+        firebaseRootRef = FirebaseDatabase.getInstance().getReference();
         MenuRef = firebaseRootRef.child("Menu");
         MenuList = new ArrayList<>();
-
-
-        Log.d(TAG, "Before attaching the listener");
         ValueEventListener valueEventListener = new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d(TAG, "Inside onDatachange() method");
-
+//                System.out.println("menu items:");
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
-                    String items = ds.child("items").getValue(String.class);
-                    MenuList.add(items);
+                    Item item = ds.getValue(Item.class);
+
+                    if(item.getValidLocations().get(getLocationSelected().getLocationId())) // check if item is available on selected location
+                    {
+                        MenuList.add(item);
+                    }
+                    System.out.println(item.getName());
+                    System.out.println(item.getItemDescription());
                 }
+                order.setItems(MenuList);
 
-                Log.d(TAG, MenuList.toString());
+                firebaseCallBack.onCallback(MenuList);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.d(TAG, databaseError.getMessage());
             }
-
-
         };
         MenuRef.addListenerForSingleValueEvent(valueEventListener);
-        Log.d(TAG, "After attaching the listener");
-        //Log.d(TAG, MenuList());
 
     }
-    public String printData(){
-        String strReturn = "";
-        for(String S: MenuList){
-            strReturn += S;
+
+    public void postOrder(){
+        String userId = "chrisherrera11@hotmail.com";
+        String locationId = getLocationSelected().getLocationId();
+        HashMap<String, Integer> items = new HashMap<>();
+        for (Item i : getOrder().getPickedItems()){
+            items.put(Integer.toString(i.getItemId()), i.getQuantity());
         }
-        return strReturn;
+        float total = getOrder().getTotal();
+        String status = "Submitted";
+        RestaurantOrder restaurantOrder = new RestaurantOrder(userId, items,total, status);
+        DatabaseReference orderReference = FirebaseDatabase.getInstance().getReference("Orders").child(locationId);
+        String id = orderReference.push().getKey();
+        orderReference.child(id).setValue(restaurantOrder);
     }
-    private void readData(FirebaseCallback firebaseCallback){
 
-    }
-    private interface FirebaseCallback {
-        void onCallback(List<String> list);
+    public interface FirebaseCallback {
+        void onCallback(List<Item> itemList);
     }
 }

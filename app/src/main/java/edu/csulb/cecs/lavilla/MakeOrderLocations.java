@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.csulb.cecs.lavilla.ui.makeorder.Data.Item;
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Location;
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Locations;
 import edu.csulb.cecs.lavilla.ui.makeorder.MakeOrderViewModel;
@@ -59,19 +60,18 @@ public class MakeOrderLocations extends Fragment {
 
             @Override
             public void getAllLocationMethod(List<Location> locations) {
-                System.out.println("INSIDE LOCATION METHIDS  "+locations.size());
 
                 locationsAdapter = new LocationsAdapter(getContext(), R.layout.locations_adapter_view_layout , locations);
                 locationsListView.setAdapter(locationsAdapter);
                 locationsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
+                    //Before navigating to next fragment, viewModel gets the items from Firebase
+                    //so theyre ready to display on the next fragment
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                        NavController navController = Navigation.findNavController(getActivity(), R.id.make_order_navHost);
                         Location locationSelected = locations.get(position);
                         mViewModel.setLocation(locationSelected);
-                        NavController navController = Navigation.findNavController(getActivity(), R.id.make_order_navHost);
-                        navController.navigate(R.id.action_makeOrderLocations_to_makeOrderViewMenu);
-
+                        mViewModel.getMenuItens(itemList -> navController.navigate(R.id.action_makeOrderLocations_to_makeOrderViewMenu));
 
                     }
                 });
