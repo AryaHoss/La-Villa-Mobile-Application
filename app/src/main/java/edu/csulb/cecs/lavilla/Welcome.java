@@ -14,7 +14,7 @@ public class Welcome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_welcome);
         //After 3 seconds switches to login activity
         timer = new Timer();
         timer.schedule(new TimerTask() {

@@ -17,4 +17,5 @@
     <string name="your_order_has_been_sent">Your Order Has Been Sent!</string>
     <string name="status">Status</string>
     <string name="statusCode">STATUS..</string>
+    <string name="Welcome">Welcome</string>
 </resources>
