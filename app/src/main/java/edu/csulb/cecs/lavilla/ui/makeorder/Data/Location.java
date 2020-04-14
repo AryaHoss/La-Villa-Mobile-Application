@@ -1,21 +1,23 @@
 package edu.csulb.cecs.lavilla.ui.makeorder.Data;
 
 public class Location{
-    private int locationId;
-    private String street;
     private String city;
+    private String locationId;
+    private String street;
     private int zip;
 
+    public Location(){
 
+    }
 
-    public Location(int locationId, String street, String city, int zip) {
+    public Location(String locationId, String street, String city, int zip) {
         this.locationId = locationId;
         this.street = street;
         this.city = city;
         this.zip = zip;
     }
 
-    public int getLocationId() {
+    public String getLocationId() {
         return locationId;
     }
 
