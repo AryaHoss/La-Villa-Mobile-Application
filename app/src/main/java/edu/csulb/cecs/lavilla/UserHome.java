@@ -8,7 +8,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -16,6 +19,7 @@ public class UserHome extends AppCompatActivity {
     LinearLayout account_btn;
     LinearLayout order_btn;
     LinearLayout menu_btn;
+    Button signingOut;
 
 
     @Override
@@ -26,6 +30,7 @@ public class UserHome extends AppCompatActivity {
         account_btn = findViewById(R.id.manage_account);
         order_btn = findViewById(R.id.order_btn);
         menu_btn = findViewById(R.id.menu_lookup);
+        signingOut = findViewById(R.id.button_signout);
 
         account_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +43,17 @@ public class UserHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(UserHome.this, LookupMenu.class));
+            }
+        });
+
+
+
+        signingOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent i = new Intent(UserHome.this, LoginActivity.class);
+                startActivity(i);
             }
         });
     }

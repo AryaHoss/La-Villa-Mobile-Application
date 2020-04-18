@@ -57,4 +57,12 @@
         app:layout_constraintTop_toBottomOf="@+id/order_btn">
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_signout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Out"
+        tools:layout_editor_absoluteX="157dp"
+        tools:layout_editor_absoluteY="661dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

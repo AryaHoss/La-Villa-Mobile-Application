@@ -57,6 +57,13 @@ public class UserViewModel extends ViewModel {
 
     }
 
+    public String getUid(){
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        return uid;
+    }
+
     public void getlname (String newName){
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();

@@ -84,7 +84,7 @@ public class UserAccountEdit extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference ref = firebaseDatabase.getReference("Users");
-        ref.child(uid).child("fname").setValue(newName);
+        ref.child(uid).child("lname").setValue(newName);
 
     }
 
@@ -92,7 +92,7 @@ public class UserAccountEdit extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference ref = firebaseDatabase.getReference("Users");
-        ref.child(uid).child("fname").setValue(newName);
+        ref.child(uid).child("email").setValue(newName);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         user.updateEmail(newName)
