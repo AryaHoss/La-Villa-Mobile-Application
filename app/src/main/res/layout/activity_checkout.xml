@@ -7,28 +7,66 @@
     tools:context=".CheckoutActivity"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+    <TextView
+        android:id="@+id/checkout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:gravity="center"
+        android:text="Checkout"
+        android:textColor="#A64242"
+        android:textSize="40sp"
+        android:textStyle="italic" />
+
+    <LinearLayout
+        android:id="@+id/checkout_order_total_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/checkout_title">
+
+        <TextView
+            android:id="@+id/checkout_order_total_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:gravity="start"
+            android:ems="10"
+            android:text="Order Total"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/checkout_order_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:gravity="end"
+            android:ems="10"
+            android:text="$0.00"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/place_order_btn">
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_above="@+id/place_order_btn"
+        android:layout_below="@+id/checkout_order_total_linear_layout">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/checkout_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:ems="10"
-                android:gravity="center"
-                android:text="Checkout"
-                android:textColor="#A64242"
-                android:textSize="40sp"
-                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/checkout_payment_information"
@@ -37,7 +75,7 @@
                 android:layout_margin="20dp"
                 android:text="Payment Information"
                 android:textSize="20sp"
-                android:textStyle="italic" />
+                android:textStyle="bold" />
 
             <com.stripe.android.view.CardMultilineWidget
                 android:id="@+id/card_multiline_widget"
@@ -52,7 +90,7 @@
                 android:layout_margin="20dp"
                 android:text="Billing Address"
                 android:textSize="20sp"
-                android:textStyle="italic" />
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/checkout_billing_address_layout"
@@ -150,29 +188,137 @@
                     android:layout_height="wrap_content"
                     android:hint="Phone" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/checkout_same_address_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="horizontal"
+                android:layout_below="@+id/checkout_title">
+
+                <TextView
+                    android:id="@+id/checkout_shipping_address_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shipping Address"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Same as Billing Address" />
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/checkout_shipping_address_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/checkout_shipping_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Address" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/checkout_shipping_apt_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/checkout_shipping_apt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Apt. (optional)" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/checkout_shipping_city_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/checkout_shipping_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="City" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/checkout_shipping_state_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/checkout_shipping_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="State" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/checkout_shipping_zipCode_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/checkout_shipping_zipCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="ZIP Code" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/checkout_shipping_country_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/checkout_shipping_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Country"
+                    android:text="United States"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/checkout_shipping_email_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/checkout_shipping_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/checkout_shipping_phone_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/checkout_shipping_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Phone" />
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </ScrollView>
-
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/checkout_shipping_address"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_margin="20dp"-->
-        <!--            android:text="Shipping Address"-->
-        <!--            android:textSize="20sp"-->
-        <!--            android:textStyle="italic" />-->
-
-        <!--        <com.stripe.android.view.ShippingInfoWidget-->
-        <!--            android:id="@+id/shippingInfoWidget"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginBottom="20dp"/>-->
 
     <Button
         android:id="@+id/place_order_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="Place Order" />
+        android:layout_marginBottom="5dp"
+        android:text="Place Order"
+        android:textStyle="bold"/>
 </RelativeLayout>

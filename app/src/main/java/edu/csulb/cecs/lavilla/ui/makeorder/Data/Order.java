@@ -8,8 +8,8 @@ import java.util.Arrays;
 
 public class Order{
 
-        public enum OrderType{
-            DELIVERY, PICKUP
+        public enum OrderType {
+            DELIVERY, PICKUP;
         }
 
         private int orderId;
@@ -69,6 +69,7 @@ public class Order{
         public void setOrderType(OrderType ot){
             this.orderType = ot;
         }
+        public OrderType getOrderType() {return orderType;}
 
 
     public void  printOrder() {

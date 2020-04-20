@@ -66,6 +66,7 @@ public class MakeOrderCart extends Fragment {
 
                 Intent intent = new Intent(getActivity(),CheckoutActivity.class);
                 intent.putExtra("total", total);
+                intent.putExtra("orderType", mViewModel.getOrderType().name());
                 startActivity(intent);
             }
         });

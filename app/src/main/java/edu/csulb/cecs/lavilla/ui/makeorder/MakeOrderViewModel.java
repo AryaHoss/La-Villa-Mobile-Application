@@ -47,6 +47,8 @@ public class MakeOrderViewModel extends ViewModel {
         order.setOrderType(orderType);
     }
 
+    public Order.OrderType getOrderType() { return order.getOrderType(); }
+
     public void setLocation (Location location){
         getOrder().setOrderLocation(location);
     }

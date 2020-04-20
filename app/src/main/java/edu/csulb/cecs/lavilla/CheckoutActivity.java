@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ import com.stripe.android.model.PaymentMethod;
 import com.stripe.android.model.PaymentMethodCreateParams;
 import com.stripe.android.view.CardInputWidget;
 import com.stripe.android.view.CardMultilineWidget;
+import com.stripe.android.view.ShippingInfoWidget;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -53,13 +56,15 @@ public class CheckoutActivity extends AppCompatActivity {
     private Stripe stripe;
 
     CardMultilineWidget cardMultilineWidget;
-    TextInputLayout checkout_billing_country_layout, checkout_billing_address_layout,
-            checkout_billing_apt_layout, checkout_billing_city_layout, checkout_billing_state_layout,
-            checkout_billing_zipCode_layout, checkout_billing_phone_layout, checkout_billing_email_layout;
     TextView checkout_billing_country, checkout_billing_address, checkout_billing_apt,
             checkout_billing_city, checkout_billing_state, checkout_billing_zipCode,
             checkout_billing_phone, checkout_billing_email;
+    TextView checkout_shipping_country, checkout_shipping_address, checkout_shipping_apt,
+            checkout_shipping_city, checkout_shipping_state, checkout_shipping_zipCode,
+            checkout_shipping_phone, checkout_shipping_email;
+    TextView checkout_shipping_address_title, checkout_order_total;
     Button place_order_btn;
+    CheckBox sameAddress;
     int total;
 
     String total_string;
@@ -71,6 +76,9 @@ public class CheckoutActivity extends AppCompatActivity {
 
         // TODO add more UI
         cardMultilineWidget = findViewById(R.id.card_multiline_widget);
+
+        checkout_shipping_address_title = findViewById(R.id.checkout_shipping_address_title);
+
         checkout_billing_country = findViewById(R.id.checkout_billing_country);
         checkout_billing_address = findViewById(R.id.checkout_billing_address);
         checkout_billing_apt = findViewById(R.id.checkout_billing_apt);
@@ -80,21 +88,53 @@ public class CheckoutActivity extends AppCompatActivity {
         checkout_billing_phone = findViewById(R.id.checkout_billing_phone);
         checkout_billing_email = findViewById(R.id.checkout_billing_email);
 
-        checkout_billing_country_layout = findViewById(R.id.checkout_billing_country_layout);
-        checkout_billing_address_layout = findViewById(R.id.checkout_billing_address_layout);
-        checkout_billing_apt_layout = findViewById(R.id.checkout_billing_apt_layout);
-        checkout_billing_city_layout = findViewById(R.id.checkout_billing_city_layout);
-        checkout_billing_state_layout = findViewById(R.id.checkout_billing_state_layout);
-        checkout_billing_zipCode_layout = findViewById(R.id.checkout_billing_zipCode_layout);
-        checkout_billing_phone_layout = findViewById(R.id.checkout_billing_phone_layout);
-        checkout_billing_email_layout = findViewById(R.id.checkout_billing_email_layout);
+        checkout_shipping_country = findViewById(R.id.checkout_shipping_country);
+        checkout_shipping_address = findViewById(R.id.checkout_shipping_address);
+        checkout_shipping_apt = findViewById(R.id.checkout_shipping_apt);
+        checkout_shipping_city = findViewById(R.id.checkout_shipping_city);
+        checkout_shipping_state = findViewById(R.id.checkout_shipping_state);
+        checkout_shipping_zipCode = findViewById(R.id.checkout_shipping_zipCode);
+        checkout_shipping_phone = findViewById(R.id.checkout_shipping_phone);
+        checkout_shipping_email = findViewById(R.id.checkout_shipping_email);
+
+        checkout_order_total = findViewById(R.id.checkout_order_total);
 
         place_order_btn = findViewById(R.id.place_order_btn);
+        sameAddress = findViewById(R.id.checkBox);
 
         Intent intent = getIntent();
 //        total_string = intent.getStringExtra("total");
 //        float total_float = (float) intent.getFloatExtra("total", 0);
+        String orderType = intent.getStringExtra("orderType");
         total = (int) (intent.getIntExtra("total", 0));
+        float total_float = ((float) total) / 100;
+        String total_string = "$" + total_float;
+        checkout_order_total.setText(total_string);
+
+        if(orderType.equals("DELIVERY")) {
+            checkout_shipping_address_title.setVisibility(View.VISIBLE);
+            sameAddress.setVisibility(View.VISIBLE);
+            checkout_shipping_address.setVisibility(View.VISIBLE);
+            checkout_shipping_apt.setVisibility(View.VISIBLE);
+            checkout_shipping_city.setVisibility(View.VISIBLE);
+            checkout_shipping_zipCode.setVisibility(View.VISIBLE);
+            checkout_shipping_state.setVisibility(View.VISIBLE);
+            checkout_shipping_email.setVisibility(View.VISIBLE);
+            checkout_shipping_phone.setVisibility(View.VISIBLE);
+            checkout_shipping_country.setVisibility(View.VISIBLE);
+        }
+        else {
+            checkout_shipping_address_title.setVisibility(View.GONE);
+            sameAddress.setVisibility(View.GONE);
+            checkout_shipping_address.setVisibility(View.GONE);
+            checkout_shipping_apt.setVisibility(View.GONE);
+            checkout_shipping_city.setVisibility(View.GONE);
+            checkout_shipping_zipCode.setVisibility(View.GONE);
+            checkout_shipping_state.setVisibility(View.GONE);
+            checkout_shipping_email.setVisibility(View.GONE);
+            checkout_shipping_phone.setVisibility(View.GONE);
+            checkout_shipping_country.setVisibility(View.GONE);
+        }
 
         Request request = new Request.Builder()
                 .url(BACKEND_URL + "stripe-key")
@@ -102,6 +142,22 @@ public class CheckoutActivity extends AppCompatActivity {
                 .build();
         httpClient.newCall(request)
                 .enqueue(new StripeKeyCallback(this));
+
+        sameAddress.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(sameAddress.isChecked()) {
+                    checkout_shipping_address.setText(checkout_billing_address.getText());
+                    checkout_shipping_apt.setText(checkout_billing_apt.getText());
+                    checkout_shipping_city.setText(checkout_billing_city.getText());
+                    checkout_shipping_zipCode.setText(checkout_billing_zipCode.getText());
+                    checkout_shipping_state.setText(checkout_billing_state.getText());
+                    checkout_shipping_email.setText(checkout_billing_email.getText());
+                    checkout_shipping_phone.setText(checkout_billing_phone.getText());
+                    checkout_shipping_country.setText(checkout_billing_country.getText());
+                }
+            }
+        });
     }
 
     private static final class StripeKeyCallback implements Callback {
@@ -169,53 +225,74 @@ public class CheckoutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String address = checkout_billing_address.getText().toString();
-                String apt = checkout_billing_apt.getText().toString();
-                String city = checkout_billing_city.getText().toString();
-                String zipCode = checkout_billing_zipCode.getText().toString();
-                String state = checkout_billing_state.getText().toString();
-                String country = checkout_billing_country.getText().toString();
-                String email = checkout_billing_email.getText().toString();
-                String phone = checkout_billing_phone.getText().toString();
+                String billing_address = checkout_billing_address.getText().toString();
+                String billing_apt = checkout_billing_apt.getText().toString();
+                String billing_city = checkout_billing_city.getText().toString();
+                String billing_zipCode = checkout_billing_zipCode.getText().toString();
+                String billing_state = checkout_billing_state.getText().toString();
+                String billing_country = checkout_billing_country.getText().toString();
+                String billing_email = checkout_billing_email.getText().toString();
+                String billing_phone = checkout_billing_phone.getText().toString();
+
+                String shipping_address = checkout_shipping_address.getText().toString();
+                String shipping_apt = checkout_shipping_apt.getText().toString();
+                String shipping_city = checkout_shipping_city.getText().toString();
+                String shipping_zipCode = checkout_shipping_zipCode.getText().toString();
+                String shipping_state = checkout_shipping_state.getText().toString();
+                String shipping_country = checkout_shipping_country.getText().toString();
+                String shipping_email = checkout_shipping_email.getText().toString();
+                String shipping_phone = checkout_shipping_phone.getText().toString();
 
                 if(!cardMultilineWidget.validateAllFields()) {
 
                 }
-                else if(address.isEmpty()) {
-                    checkout_billing_address.setError("Address is required");
+                else if(billing_address.isEmpty()) {
+                    checkout_billing_address.setError("This field is required");
                     checkout_billing_address.requestFocus();
-//                    TextInputLayout checkout_billing_address_layout = (TextInputLayout) findViewById(R.id.checkout_billing_address_layout);
-//                    checkout_billing_address_layout.setError("Address is required.");
                 }
-                else if(city.isEmpty()) {
-                    checkout_billing_city.setError("City is required");
+                else if(billing_city.isEmpty()) {
+                    checkout_billing_city.setError("This field is required");
                     checkout_billing_city.requestFocus();
-//                    TextInputLayout checkout_billing_city_layout = (TextInputLayout) findViewById(R.id.checkout_billing_city_layout);
-//                    checkout_billing_city_layout.setError("City is required.");
                 }
-                else if(state.isEmpty()) {
-                    checkout_billing_state.setError("State is required");
+                else if(billing_state.isEmpty()) {
+                    checkout_billing_state.setError("This field is required");
                     checkout_billing_state.requestFocus();
-//                    TextInputLayout checkout_billing_state_layout = (TextInputLayout) findViewById(R.id.checkout_billing_state_layout);
-//                    checkout_billing_state_layout.setError("State is required.");
                 }
-                else if(zipCode.isEmpty()) {
-                    checkout_billing_zipCode.setError("ZIP Code is required");
+                else if(billing_zipCode.isEmpty()) {
+                    checkout_billing_zipCode.setError("This field is required");
                     checkout_billing_zipCode.requestFocus();
-//                    TextInputLayout checkout_billing_zipCode_layout = (TextInputLayout) findViewById(R.id.checkout_billing_zipCode_layout);
-//                    checkout_billing_zipCode_layout.setError("ZIP Code is required.");
                 }
-                else if(country.isEmpty()) {
-                    checkout_billing_country.setError("Country is required");
+                else if(billing_country.isEmpty()) {
+                    checkout_billing_country.setError("This field is required");
                     checkout_billing_country.requestFocus();
-//                    TextInputLayout checkout_billing_country_layout = (TextInputLayout) findViewById(R.id.checkout_billing_country_layout);
-//                    checkout_billing_country_layout.setError("Country is required.");
                 }
-                else if(email.isEmpty()) {
-                    checkout_billing_email.setError("Email is required");
+                else if(billing_email.isEmpty()) {
+                    checkout_billing_email.setError("This field is required");
                     checkout_billing_email.requestFocus();
-//                    TextInputLayout checkout_billing_email_layout = (TextInputLayout) findViewById(R.id.checkout_billing_email_layout);
-//                    checkout_billing_email_layout.setError("Email is required.");
+                }
+                else if(shipping_address.isEmpty()) {
+                    checkout_shipping_address.setError("This field is required");
+                    checkout_shipping_address.requestFocus();
+                }
+                else if(shipping_city.isEmpty()) {
+                    checkout_shipping_city.setError("This field is required");
+                    checkout_shipping_city.requestFocus();
+                }
+                else if(shipping_state.isEmpty()) {
+                    checkout_shipping_state.setError("This field is required");
+                    checkout_shipping_state.requestFocus();
+                }
+                else if(shipping_zipCode.isEmpty()) {
+                    checkout_shipping_zipCode.setError("This field is required");
+                    checkout_shipping_zipCode.requestFocus();
+                }
+                else if(shipping_country.isEmpty()) {
+                    checkout_shipping_country.setError("This field is required");
+                    checkout_shipping_country.requestFocus();
+                }
+                else if(shipping_email.isEmpty()) {
+                    checkout_shipping_email.setError("This field is required");
+                    checkout_shipping_email.requestFocus();
                 }
                 else {
                     pay();
