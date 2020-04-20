@@ -56,6 +56,13 @@ public class UserHome extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        order_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
 }

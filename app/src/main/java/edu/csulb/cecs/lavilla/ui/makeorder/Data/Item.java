@@ -10,6 +10,9 @@ public class Item {
     private float price;
     private int quantity;
 
+
+    private String imgUrl;
+
     public HashMap<String, Boolean> getValidLocations() {
         return validLocation;
     }
@@ -59,6 +62,10 @@ public class Item {
 
     public void decreaseQty() {
         this.quantity--;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
     }
 
     public String getItemDescription (){
