@@ -11,10 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import edu.csulb.cecs.lavilla.R;
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Location;
@@ -45,6 +48,8 @@ public class MakeOrderFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Log.d("USER", user);
         mViewModel = new  ViewModelProvider(getActivity()).get(MakeOrderViewModel.class);
         mViewModel.getOrder().printOrder();
         Button deliveryButton =  view.findViewById(R.id.delivery_button);

@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Item;
 import edu.csulb.cecs.lavilla.ui.makeorder.MakeOrderViewModel;
 
@@ -25,15 +27,16 @@ public class ItemView extends Fragment implements View.OnClickListener {
     //widgets
     TextView tvTitle;
     ImageView ivItemImg;
-    EditText etItemDescription;
+    TextView etItemDescription;
     Button plusButtom;
     Button minusButton;
-    EditText etItemQty;
+    TextView etItemQty;
 
     //vars
     Item item;
     String title;
     String description;
+    String imgUrl;
     int qty;
 
     //ViewModel
@@ -50,13 +53,15 @@ public class ItemView extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_make_order_item_view, container, false);
 
+        Picasso.get().setLoggingEnabled(true);
+
         //get the viewmodel and selected item info
         mViewModel = new ViewModelProvider(getActivity()).get(MakeOrderViewModel.class);
         item = (Item) mViewModel.getItemSelected();
         title = item.getName();
         description = item.getDescription();
         qty = item.getQuantity();
-
+        imgUrl = item.getImgUrl();
         //set  widgets
 
         tvTitle = view.findViewById(R.id.item_name);
@@ -65,6 +70,8 @@ public class ItemView extends Fragment implements View.OnClickListener {
         tvTitle.setText(title);
         etItemDescription.setText(description);
         etItemQty.setText(Integer.toString(qty));
+        ivItemImg = view.findViewById(R.id.item_img);
+        Picasso.get().load(imgUrl).into(ivItemImg);
 
         //buttons
         plusButtom = view.findViewById(R.id.plus_btn);
