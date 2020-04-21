@@ -62,7 +62,7 @@ public class CheckoutActivity extends AppCompatActivity {
     TextView checkout_shipping_country, checkout_shipping_address, checkout_shipping_apt,
             checkout_shipping_city, checkout_shipping_state, checkout_shipping_zipCode,
             checkout_shipping_phone, checkout_shipping_email;
-    TextView checkout_shipping_address_title, checkout_order_total;
+    TextView checkout_shipping_address_title, checkout_order_subTotal, checkout_order_tax, checkout_order_shipping_cost, checkout_order_total;
     Button place_order_btn;
     CheckBox sameAddress;
     int total;
@@ -97,6 +97,9 @@ public class CheckoutActivity extends AppCompatActivity {
         checkout_shipping_phone = findViewById(R.id.checkout_shipping_phone);
         checkout_shipping_email = findViewById(R.id.checkout_shipping_email);
 
+        checkout_order_subTotal = findViewById(R.id.checkout_order_subTotal);
+        checkout_order_tax = findViewById(R.id.checkout_order_tax);
+        checkout_order_shipping_cost = findViewById(R.id.checkout_order_shipping_cost);
         checkout_order_total = findViewById(R.id.checkout_order_total);
 
         place_order_btn = findViewById(R.id.place_order_btn);
@@ -106,12 +109,21 @@ public class CheckoutActivity extends AppCompatActivity {
 //        total_string = intent.getStringExtra("total");
 //        float total_float = (float) intent.getFloatExtra("total", 0);
         String orderType = intent.getStringExtra("orderType");
-        total = (int) (intent.getIntExtra("total", 0));
-        float total_float = ((float) total) / 100;
-        String total_string = "$" + total_float;
-        checkout_order_total.setText(total_string);
+        int subTotal = (int) (intent.getIntExtra("total", 0));
+        float subTotal_float = ((float) subTotal) / 100;
+        String subTotal_string = "$" + subTotal_float;
+        checkout_order_subTotal.setText(subTotal_string);
+
+        int tax = subTotal * 725 / 10000;
+        float tax_float = ((float) tax) / 100;
+        String tax_string = "$" + tax_float;
+        checkout_order_tax.setText(tax_string);
+
+        int shippingCost;
 
         if(orderType.equals("DELIVERY")) {
+            shippingCost = 599;
+            checkout_order_shipping_cost.setText("$5.99");
             checkout_shipping_address_title.setVisibility(View.VISIBLE);
             sameAddress.setVisibility(View.VISIBLE);
             checkout_shipping_address.setVisibility(View.VISIBLE);
@@ -124,6 +136,8 @@ public class CheckoutActivity extends AppCompatActivity {
             checkout_shipping_country.setVisibility(View.VISIBLE);
         }
         else {
+            shippingCost = 0;
+            checkout_order_shipping_cost.setText("$0.00");
             checkout_shipping_address_title.setVisibility(View.GONE);
             sameAddress.setVisibility(View.GONE);
             checkout_shipping_address.setVisibility(View.GONE);
@@ -135,6 +149,15 @@ public class CheckoutActivity extends AppCompatActivity {
             checkout_shipping_phone.setVisibility(View.GONE);
             checkout_shipping_country.setVisibility(View.GONE);
         }
+
+        float shippingCost_float = ((float) shippingCost) / 100;
+        String shippingCost_string = "$" + shippingCost_float;
+        checkout_order_shipping_cost.setText(shippingCost_string);
+
+        total = subTotal + tax + shippingCost;
+        float total_float = ((float) total) / 100;
+        String total_string = "$" + total_float;
+        checkout_order_total.setText(total_string);
 
         Request request = new Request.Builder()
                 .url(BACKEND_URL + "stripe-key")

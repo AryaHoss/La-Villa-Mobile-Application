@@ -21,38 +21,6 @@
         android:textSize="40sp"
         android:textStyle="italic" />
 
-    <LinearLayout
-        android:id="@+id/checkout_order_total_linear_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:orientation="horizontal"
-        android:layout_below="@+id/checkout_title">
-
-        <TextView
-            android:id="@+id/checkout_order_total_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:gravity="start"
-            android:ems="10"
-            android:text="Order Total"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/checkout_order_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:gravity="end"
-            android:ems="10"
-            android:text="$0.00"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,12 +29,116 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_above="@+id/place_order_btn"
-        android:layout_below="@+id/checkout_order_total_linear_layout">
+        android:layout_below="@+id/checkout_title">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/checkout_order_summary_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Order Summary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/checkout_order_subTotal_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:ems="16"
+                    android:text="Order Sub Total"/>
+
+                <TextView
+                    android:id="@+id/checkout_order_subTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:ems="10"
+                    android:text="$0.00" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/checkout_order_tax_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:ems="16"
+                    android:text="Tax" />
+
+                <TextView
+                    android:id="@+id/checkout_order_tax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:ems="10"
+                    android:text="$0.00" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/checkout_order_shipping_cost_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:ems="16"
+                    android:text="Shipping" />
+
+                <TextView
+                    android:id="@+id/checkout_order_shipping_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:ems="10"
+                    android:text="$0.00" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/checkout_order_total_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:ems="16"
+                    android:text="Total"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/checkout_order_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:ems="10"
+                    android:text="$0.00"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/checkout_payment_information"
