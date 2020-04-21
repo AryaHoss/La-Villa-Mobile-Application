@@ -6,7 +6,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,20 +15,15 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.android.ApiResultCallback;
 import com.stripe.android.PaymentConfiguration;
-import com.stripe.android.PaymentIntentResult;
 import com.stripe.android.Stripe;
-import com.stripe.android.model.PaymentIntent;
 import com.stripe.android.model.PaymentMethod;
 import com.stripe.android.model.PaymentMethodCreateParams;
-import com.stripe.android.view.CardInputWidget;
 import com.stripe.android.view.CardMultilineWidget;
-import com.stripe.android.view.ShippingInfoWidget;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -111,12 +105,12 @@ public class CheckoutActivity extends AppCompatActivity {
         String orderType = intent.getStringExtra("orderType");
         int subTotal = (int) (intent.getIntExtra("total", 0));
         float subTotal_float = ((float) subTotal) / 100;
-        String subTotal_string = "$" + subTotal_float;
+        String subTotal_string = "$" + String.format("%.2f", subTotal_float);
         checkout_order_subTotal.setText(subTotal_string);
 
         int tax = subTotal * 725 / 10000;
         float tax_float = ((float) tax) / 100;
-        String tax_string = "$" + tax_float;
+        String tax_string = "$" + String.format("%.2f", tax_float);
         checkout_order_tax.setText(tax_string);
 
         int shippingCost;
@@ -151,12 +145,12 @@ public class CheckoutActivity extends AppCompatActivity {
         }
 
         float shippingCost_float = ((float) shippingCost) / 100;
-        String shippingCost_string = "$" + shippingCost_float;
+        String shippingCost_string = "$" + String.format("%.2f", shippingCost_float);
         checkout_order_shipping_cost.setText(shippingCost_string);
 
         total = subTotal + tax + shippingCost;
         float total_float = ((float) total) / 100;
-        String total_string = "$" + total_float;
+        String total_string = "$" + String.format("%.2f", total_float);
         checkout_order_total.setText(total_string);
 
         Request request = new Request.Builder()
