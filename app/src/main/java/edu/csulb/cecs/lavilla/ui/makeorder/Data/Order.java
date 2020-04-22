@@ -20,6 +20,12 @@ public class Order{
         private OrderType orderType;
         private Location orderLocation;
 
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    private Address address;
+
 
     //constructors
     public Order(ArrayList<Item> items) {

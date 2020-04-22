@@ -5,6 +5,7 @@ package edu.csulb.cecs.lavilla.ui.makeorder;
         import androidx.annotation.NonNull;
         import androidx.lifecycle.ViewModel;
 
+        import com.google.firebase.auth.FirebaseAuth;
         import com.google.firebase.database.DataSnapshot;
         import com.google.firebase.database.DatabaseError;
         import com.google.firebase.database.DatabaseReference;
@@ -41,6 +42,9 @@ public class MakeOrderViewModel extends ViewModel {
         order = new Order();
     }
 
+    public void setOrderAddress(Address address){
+        order.setAddress(address);
+    }
     public Order getOrder(){ return order; }
 
     public void setOrderType(Order.OrderType orderType){
@@ -117,7 +121,7 @@ public class MakeOrderViewModel extends ViewModel {
     }
 
     public void postOrder(){
-        String userId = "chrisherrera11@hotmail.com";
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String locationId = getLocationSelected().getLocationId();
         HashMap<String, Integer> items = new HashMap<>();
         for (Item i : getOrder().getPickedItems()){
@@ -125,10 +129,15 @@ public class MakeOrderViewModel extends ViewModel {
         }
         float total = getOrder().getTotal();
         String status = "Submitted";
+
         RestaurantOrder restaurantOrder = new RestaurantOrder(userId, items,total, status);
         DatabaseReference orderReference = FirebaseDatabase.getInstance().getReference("Orders").child(locationId);
-        String id = orderReference.push().getKey();
-        orderReference.child(id).setValue(restaurantOrder);
+        String orderID = orderReference.push().getKey();
+        orderReference.child(orderID).setValue(restaurantOrder);
+
+        DatabaseReference userOrderReference = FirebaseDatabase.getInstance().getReference("UserOrders").child(userId);
+        userOrderReference.child(orderID).setValue(restaurantOrder);
+
     }
 
     public interface FirebaseCallback {

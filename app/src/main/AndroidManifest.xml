@@ -19,11 +19,11 @@
         <activity android:name=".AdminView" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".CheckoutActivity" />
-        <activity android:name=".Welcome" />
+        <activity android:name=".MakeOrderMain" />
         <activity android:name=".MainActivity" />
         <activity
-            android:name=".MakeOrderMain"
-            android:label=".MakeOrderMain"
+            android:name=".Welcome"
+            android:label=".Welcome"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
