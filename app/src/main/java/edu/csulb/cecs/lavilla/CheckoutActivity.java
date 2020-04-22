@@ -287,27 +287,27 @@ public class CheckoutActivity extends AppCompatActivity {
                     checkout_billing_email.setError("This field is required");
                     checkout_billing_email.requestFocus();
                 }
-                else if(shipping_address.isEmpty()) {
+                else if(shipping_address.isEmpty() && checkout_shipping_address.getVisibility() == View.VISIBLE) {
                     checkout_shipping_address.setError("This field is required");
                     checkout_shipping_address.requestFocus();
                 }
-                else if(shipping_city.isEmpty()) {
+                else if(shipping_city.isEmpty() && checkout_shipping_city.getVisibility() == View.VISIBLE) {
                     checkout_shipping_city.setError("This field is required");
                     checkout_shipping_city.requestFocus();
                 }
-                else if(shipping_state.isEmpty()) {
+                else if(shipping_state.isEmpty() && checkout_shipping_state.getVisibility() == View.VISIBLE) {
                     checkout_shipping_state.setError("This field is required");
                     checkout_shipping_state.requestFocus();
                 }
-                else if(shipping_zipCode.isEmpty()) {
+                else if(shipping_zipCode.isEmpty() && checkout_shipping_zipCode.getVisibility() == View.VISIBLE) {
                     checkout_shipping_zipCode.setError("This field is required");
                     checkout_shipping_zipCode.requestFocus();
                 }
-                else if(shipping_country.isEmpty()) {
+                else if(shipping_country.isEmpty() && checkout_shipping_country.getVisibility() == View.VISIBLE) {
                     checkout_shipping_country.setError("This field is required");
                     checkout_shipping_country.requestFocus();
                 }
-                else if(shipping_email.isEmpty()) {
+                else if(shipping_email.isEmpty() && checkout_shipping_email.getVisibility() == View.VISIBLE) {
                     checkout_shipping_email.setError("This field is required");
                     checkout_shipping_email.requestFocus();
                 }
@@ -343,6 +343,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private void pay(@Nullable String paymentMethodId, @Nullable String paymentIntentId) {
         final MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         final String json;
+
         // TODO include data to send to server
         if (paymentMethodId != null) {
             json = "{"
@@ -350,15 +351,15 @@ public class CheckoutActivity extends AppCompatActivity {
                     + "\"paymentMethodId\":" + "\"" + paymentMethodId + "\","
                     + "\"currency\":\"usd\","
                     + "\"total\":" + total + ","
-                    + "\"email\":\"" + checkout_billing_email + "\","
-                    + "\"phone\":\"" + checkout_billing_phone + "\","
-                    + "\"city\":\"" + checkout_billing_city + "\","
-                    + "\"line1\":\"" + checkout_billing_address + "\","
-                    + "\"line2\":\"" + checkout_billing_apt + "\","
-                    + "\"postal_code\":\"" + checkout_billing_zipCode + "\","
-                    + "\"state\":\"" + checkout_billing_state + "\","
-                    + "\"country\":\"" + checkout_billing_country + "\","
-                    + "\"isSavingCard\":true"
+                    + "\"email\":\"" + checkout_billing_email.getText().toString() + "\","
+                    + "\"phone\":\"" + checkout_billing_phone.getText().toString() + "\","
+                    + "\"city\":\"" + checkout_billing_city.getText().toString() + "\","
+                    + "\"line1\":\"" + checkout_billing_address.getText().toString() + "\","
+                    + "\"line2\":\"" + checkout_billing_apt.getText().toString() + "\","
+                    + "\"postal_code\":\"" + checkout_billing_zipCode.getText().toString() + "\","
+                    + "\"state\":\"" + checkout_billing_state.getText().toString() + "\","
+                    + "\"country\":\"" + checkout_billing_country.getText().toString() + "\","
+                    + "\"isSavingCard\":false"
                     + "}";
         } else {
             json = "{"
