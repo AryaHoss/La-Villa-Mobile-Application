@@ -71,7 +71,7 @@ public class CheckoutActivity extends AppCompatActivity {
         // TODO add more UI
         cardMultilineWidget = findViewById(R.id.card_multiline_widget);
 
-        checkout_shipping_address_title = findViewById(R.id.checkout_shipping_address_title);
+        checkout_shipping_address_title = findViewById(R.id.checkout_billing_address_title);
 
         checkout_billing_country = findViewById(R.id.checkout_billing_country);
         checkout_billing_address = findViewById(R.id.checkout_billing_address);
@@ -82,17 +82,17 @@ public class CheckoutActivity extends AppCompatActivity {
         checkout_billing_phone = findViewById(R.id.checkout_billing_phone);
         checkout_billing_email = findViewById(R.id.checkout_billing_email);
 
-        checkout_shipping_country = findViewById(R.id.checkout_shipping_country);
-        checkout_shipping_address = findViewById(R.id.checkout_shipping_address);
-        checkout_shipping_apt = findViewById(R.id.checkout_shipping_apt);
-        checkout_shipping_city = findViewById(R.id.checkout_shipping_city);
-        checkout_shipping_state = findViewById(R.id.checkout_shipping_state);
-        checkout_shipping_zipCode = findViewById(R.id.checkout_shipping_zipCode);
-        checkout_shipping_phone = findViewById(R.id.checkout_shipping_phone);
-        checkout_shipping_email = findViewById(R.id.checkout_shipping_email);
+        checkout_shipping_country = findViewById(R.id.checkout_billing_country);
+        checkout_shipping_address = findViewById(R.id.checkout_billing_address);
+        checkout_shipping_apt = findViewById(R.id.checkout_billing_apt);
+        checkout_shipping_city = findViewById(R.id.checkout_billing_city);
+        checkout_shipping_state = findViewById(R.id.checkout_billing_state);
+        checkout_shipping_zipCode = findViewById(R.id.checkout_billing_zipCode);
+        checkout_shipping_phone = findViewById(R.id.checkout_billing_phone);
+        checkout_shipping_email = findViewById(R.id.checkout_billing_email);
 
         checkout_order_subTotal = findViewById(R.id.checkout_order_subTotal);
-        checkout_order_tax = findViewById(R.id.checkout_order_tax);
+        checkout_order_tax = findViewById(R.id.checkout_tax);
         checkout_order_shipping_cost = findViewById(R.id.checkout_order_shipping_cost);
         checkout_order_total = findViewById(R.id.checkout_order_total);
 
