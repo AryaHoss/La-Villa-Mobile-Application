@@ -130,13 +130,13 @@ public class MakeOrderViewModel extends ViewModel {
         float total = getOrder().getTotal();
         String status = "Submitted";
 
-        RestaurantOrder restaurantOrder = new RestaurantOrder(userId, items,total, status);
+//        RestaurantOrder restaurantOrder = new RestaurantOrder(userId, items,total, status);
         DatabaseReference orderReference = FirebaseDatabase.getInstance().getReference("Orders").child(locationId);
         String orderID = orderReference.push().getKey();
-        orderReference.child(orderID).setValue(restaurantOrder);
+//        orderReference.child(orderID).setValue(restaurantOrder);
 
         DatabaseReference userOrderReference = FirebaseDatabase.getInstance().getReference("UserOrders").child(userId);
-        userOrderReference.child(orderID).setValue(restaurantOrder);
+//        userOrderReference.child(orderID).setValue(restaurantOrder);
 
     }
 

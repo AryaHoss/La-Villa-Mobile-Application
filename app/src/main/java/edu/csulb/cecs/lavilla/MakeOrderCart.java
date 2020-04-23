@@ -18,6 +18,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import edu.csulb.cecs.lavilla.ui.makeorder.Data.Item;
+import edu.csulb.cecs.lavilla.ui.makeorder.Data.RestaurantOrder;
 import edu.csulb.cecs.lavilla.ui.makeorder.MakeOrderViewModel;
 import edu.csulb.cecs.lavilla.ui.makeorder.adapters.CartAdapter;
 
@@ -61,10 +68,14 @@ public class MakeOrderCart extends Fragment {
                 //mViewModel.postOrder();
 
                 int total = (int) (mViewModel.getOrder().getTotal() * 100);
-
-                Intent intent = new Intent(getActivity(),CheckoutActivity.class);
-                intent.putExtra("total", total);
-                intent.putExtra("orderType", mViewModel.getOrderType().name());
+                Intent intent = new Intent(getActivity(), CheckoutActivity.class);
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                HashMap<String, Integer> items = new HashMap<>();
+                for (Item i : mViewModel.getOrder().getPickedItems()){
+                    items.put(Integer.toString(i.getItemId()), i.getQuantity());
+                }
+                RestaurantOrder orderDetail = new RestaurantOrder(userId, items, mViewModel.getLocationSelected().getLocationId(), mViewModel.getOrderType().name(), total);
+                intent.putExtra("orderDetail", orderDetail);
                 startActivity(intent);
             }
         });

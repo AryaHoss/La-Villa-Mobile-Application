@@ -15,8 +15,12 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.android.ApiResultCallback;
 import com.stripe.android.PaymentConfiguration;
@@ -25,12 +29,17 @@ import com.stripe.android.model.PaymentMethod;
 import com.stripe.android.model.PaymentMethodCreateParams;
 import com.stripe.android.view.CardMultilineWidget;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.csulb.cecs.lavilla.ui.makeorder.Data.Item;
+import edu.csulb.cecs.lavilla.ui.makeorder.Data.RestaurantOrder;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -48,6 +57,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
     private OkHttpClient httpClient = new OkHttpClient();
     private Stripe stripe;
+    private RestaurantOrder orderDetail;
 
     CardMultilineWidget cardMultilineWidget;
     TextView checkout_billing_country, checkout_billing_address, checkout_billing_apt,
@@ -82,14 +92,14 @@ public class CheckoutActivity extends AppCompatActivity {
         checkout_billing_phone = findViewById(R.id.checkout_billing_phone);
         checkout_billing_email = findViewById(R.id.checkout_billing_email);
 
-        checkout_shipping_country = findViewById(R.id.checkout_billing_country);
-        checkout_shipping_address = findViewById(R.id.checkout_billing_address);
-        checkout_shipping_apt = findViewById(R.id.checkout_billing_apt);
-        checkout_shipping_city = findViewById(R.id.checkout_billing_city);
-        checkout_shipping_state = findViewById(R.id.checkout_billing_state);
-        checkout_shipping_zipCode = findViewById(R.id.checkout_billing_zipCode);
-        checkout_shipping_phone = findViewById(R.id.checkout_billing_phone);
-        checkout_shipping_email = findViewById(R.id.checkout_billing_email);
+        checkout_shipping_country = findViewById(R.id.checkout_shipping_country);
+        checkout_shipping_address = findViewById(R.id.checkout_shipping_address);
+        checkout_shipping_apt = findViewById(R.id.checkout_shipping_apt);
+        checkout_shipping_city = findViewById(R.id.checkout_shipping_city);
+        checkout_shipping_state = findViewById(R.id.checkout_shipping_state);
+        checkout_shipping_zipCode = findViewById(R.id.checkout_shipping_zipCode);
+        checkout_shipping_phone = findViewById(R.id.checkout_shipping_phone);
+        checkout_shipping_email = findViewById(R.id.checkout_shipping_email);
 
         checkout_order_subTotal = findViewById(R.id.checkout_order_subTotal);
         checkout_order_tax = findViewById(R.id.checkout_tax);
@@ -100,10 +110,9 @@ public class CheckoutActivity extends AppCompatActivity {
         sameAddress = findViewById(R.id.checkBox);
 
         Intent intent = getIntent();
-//        total_string = intent.getStringExtra("total");
-//        float total_float = (float) intent.getFloatExtra("total", 0);
-        String orderType = intent.getStringExtra("orderType");
-        int subTotal = (int) (intent.getIntExtra("total", 0));
+        orderDetail = (RestaurantOrder) intent.getSerializableExtra("orderDetail");
+        String orderType = orderDetail.getOrderMethod();
+        int subTotal = orderDetail.getTotal();
         float subTotal_float = ((float) subTotal) / 100;
         String subTotal_string = "$" + String.format("%.2f", subTotal_float);
         checkout_order_subTotal.setText(subTotal_string);
@@ -432,6 +441,7 @@ public class CheckoutActivity extends AppCompatActivity {
                         activity.runOnUiThread(() ->
                                 stripe.handleNextActionForPayment(activity, paymentIntentClientSecret));
                     } else {
+                        activity.addOrderToFirebase();
                         activity.displayAlert("Payment succeeded",
                                 paymentIntentClientSecret, true);
                     }
@@ -439,6 +449,25 @@ public class CheckoutActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+    private void addOrderToFirebase() {
+        DatabaseReference orderReference = FirebaseDatabase.getInstance().getReference("Orders");
+        String orderID = orderReference.push().getKey();
+        HashMap<String, String> shippingAddress = new HashMap<>();
+        if(orderDetail.getOrderMethod().equals("DELIVERY")) {
+            shippingAddress.put("line1", checkout_shipping_address.getText().toString());
+            shippingAddress.put("line2", checkout_shipping_apt.getText().toString());
+            shippingAddress.put("city", checkout_shipping_city.getText().toString());
+            shippingAddress.put("state", checkout_shipping_state.getText().toString());
+            shippingAddress.put("zipCode", checkout_shipping_zipCode.getText().toString());
+            shippingAddress.put("email", checkout_shipping_email.getText().toString());
+            shippingAddress.put("phone", checkout_shipping_phone.getText().toString());
+            orderDetail.setShippingAddress(shippingAddress);
+        }
+        orderDetail.setTotal(total);
+        orderDetail.setStatus("submitted");
+        orderReference.child(orderID).setValue(orderDetail);
     }
 
     private void displayAlert(@NonNull String title, @NonNull String message, boolean restartDemo) {
