@@ -43,7 +43,7 @@ public class CartAdapter extends ArrayAdapter<Item> {
         TextView tvQuantity = (TextView) convertView.findViewById(R.id.item_qty);
 
         tvItemName.setText(name);
-        tvPrice.setText(Float.toString(totalItemPrice));
+        tvPrice.setText("$" + String.format("%.2f", totalItemPrice));
         tvQuantity.setText(Integer.toString(qty));
 
         return convertView;

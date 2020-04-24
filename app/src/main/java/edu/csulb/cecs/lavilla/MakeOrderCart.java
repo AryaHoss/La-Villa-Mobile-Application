@@ -58,8 +58,8 @@ public class MakeOrderCart extends Fragment {
         cartListView = (ListView) view.findViewById(R.id.cart_listview);
         cartAdapter = new CartAdapter(getContext(), R.layout.cart_adapter_view_layout, mViewModel.getOrder().getPickedItems());
         cartListView.setAdapter(cartAdapter);
-        TextView tvOrderTotal = view.findViewById(R.id.order_total);
-        tvOrderTotal.setText("$ "+Float.toString(mViewModel.getOrder().getTotal()));
+        TextView tvOrderTotal = view.findViewById(R.id.order_subTotal);
+        tvOrderTotal.setText("$" + String.format("%.2f", mViewModel.getOrder().getTotal()));
         checkoutBtn = view.findViewById(R.id.checkout_btn);
         checkoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override

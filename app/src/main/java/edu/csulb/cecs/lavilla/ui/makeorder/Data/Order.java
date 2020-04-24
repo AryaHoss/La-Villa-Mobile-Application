@@ -2,11 +2,12 @@ package edu.csulb.cecs.lavilla.ui.makeorder.Data;
 
 import androidx.lifecycle.MutableLiveData;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class Order{
+public class Order implements Serializable {
 
         public enum OrderType {
             DELIVERY, PICKUP;
