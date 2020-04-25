@@ -31,10 +31,7 @@ import edu.csulb.cecs.lavilla.ui.makeorder.adapters.CartAdapter;
 
 public class MakeOrderCart extends Fragment {
 
-    ListView cartListView;
-    MakeOrderViewModel mViewModel;
-    CartAdapter cartAdapter;
-    Button checkoutBtn;
+    private MakeOrderViewModel mViewModel;
 
 
     public MakeOrderCart() {
@@ -55,13 +52,13 @@ public class MakeOrderCart extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_make_order_cart, container, false);
         mViewModel = new ViewModelProvider(getActivity()).get(MakeOrderViewModel.class);
-        cartListView = (ListView) view.findViewById(R.id.cart_listview);
-        cartAdapter = new CartAdapter(getContext(), R.layout.cart_adapter_view_layout, mViewModel.getOrder().getPickedItems());
+        ListView cartListView = (ListView) view.findViewById(R.id.cart_listview);
+        CartAdapter cartAdapter = new CartAdapter(getContext(), R.layout.cart_adapter_view_layout, mViewModel.getOrder().getPickedItems());
         cartListView.setAdapter(cartAdapter);
         TextView tvOrderTotal = view.findViewById(R.id.order_subTotal);
         tvOrderTotal.setText("$" + String.format("%.2f", mViewModel.getOrder().getTotal()));
-        checkoutBtn = view.findViewById(R.id.checkout_btn);
-        checkoutBtn.setOnClickListener(new View.OnClickListener() {
+        Button checkout_button = view.findViewById(R.id.checkout_button);
+        checkout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Todo check whether user has payment method and implement logic
@@ -76,6 +73,16 @@ public class MakeOrderCart extends Fragment {
                 }
                 RestaurantOrder orderDetail = new RestaurantOrder(userId, items, mViewModel.getLocationSelected().getLocationId(), mViewModel.getOrderType().name(), total);
                 intent.putExtra("orderDetail", orderDetail);
+                startActivity(intent);
+            }
+        });
+        Button cancel_checkout_button = view.findViewById(R.id.cancel_checkout_button);
+        cancel_checkout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Todo check whether user has payment method and implement logic
+                //mViewModel.postOrder();
+                Intent intent = new Intent(getActivity(), UserHome.class);
                 startActivity(intent);
             }
         });

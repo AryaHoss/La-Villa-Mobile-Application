@@ -63,18 +63,28 @@ public class CheckoutActivity extends AppCompatActivity {
     private RestaurantOrder orderDetail;
 
     CardMultilineWidget cardMultilineWidget;
-    TextView checkout_billing_country, checkout_billing_address, checkout_billing_apt,
-            checkout_billing_city, checkout_billing_state, checkout_billing_zipCode,
-            checkout_billing_phone, checkout_billing_email;
-    TextView checkout_shipping_country, checkout_shipping_address, checkout_shipping_apt,
-            checkout_shipping_city, checkout_shipping_state, checkout_shipping_zipCode,
-            checkout_shipping_phone, checkout_shipping_email;
-    TextView checkout_shipping_address_title, checkout_order_subTotal, checkout_order_tax, checkout_order_shipping_cost, checkout_order_total;
-    Button place_order_btn;
+    TextView checkout_billing_address,
+            checkout_billing_apt,
+            checkout_billing_city,
+            checkout_billing_state,
+            checkout_billing_zipCode,
+            checkout_billing_phone,
+            checkout_billing_email;
+    TextView checkout_shipping_address,
+            checkout_shipping_apt,
+            checkout_shipping_city,
+            checkout_shipping_state,
+            checkout_shipping_zipCode,
+            checkout_shipping_phone,
+            checkout_shipping_email;
+    TextView checkout_shipping_address_title,
+            checkout_order_subTotal,
+            checkout_order_tax,
+            checkout_order_shipping_cost,
+            checkout_order_total;
+    Button place_order_button, cancel_order_button;
     CheckBox sameAddress;
     int total;
-
-    String total_string;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +96,6 @@ public class CheckoutActivity extends AppCompatActivity {
 
         checkout_shipping_address_title = findViewById(R.id.checkout_billing_address_title);
 
-        checkout_billing_country = findViewById(R.id.checkout_billing_country);
         checkout_billing_address = findViewById(R.id.checkout_billing_address);
         checkout_billing_apt = findViewById(R.id.checkout_billing_apt);
         checkout_billing_city = findViewById(R.id.checkout_billing_city);
@@ -95,7 +104,6 @@ public class CheckoutActivity extends AppCompatActivity {
         checkout_billing_phone = findViewById(R.id.checkout_billing_phone);
         checkout_billing_email = findViewById(R.id.checkout_billing_email);
 
-        checkout_shipping_country = findViewById(R.id.checkout_shipping_country);
         checkout_shipping_address = findViewById(R.id.checkout_shipping_address);
         checkout_shipping_apt = findViewById(R.id.checkout_shipping_apt);
         checkout_shipping_city = findViewById(R.id.checkout_shipping_city);
@@ -109,7 +117,8 @@ public class CheckoutActivity extends AppCompatActivity {
         checkout_order_shipping_cost = findViewById(R.id.checkout_order_shipping_cost);
         checkout_order_total = findViewById(R.id.checkout_order_total);
 
-        place_order_btn = findViewById(R.id.place_order_btn);
+        place_order_button = findViewById(R.id.place_order_button);
+        cancel_order_button = findViewById(R.id.cancel_order_button);
         sameAddress = findViewById(R.id.checkBox);
 
         Intent intent = getIntent();
@@ -139,7 +148,6 @@ public class CheckoutActivity extends AppCompatActivity {
             checkout_shipping_state.setVisibility(View.VISIBLE);
             checkout_shipping_email.setVisibility(View.VISIBLE);
             checkout_shipping_phone.setVisibility(View.VISIBLE);
-            checkout_shipping_country.setVisibility(View.VISIBLE);
         }
         else {
             shippingCost = 0;
@@ -153,7 +161,6 @@ public class CheckoutActivity extends AppCompatActivity {
             checkout_shipping_state.setVisibility(View.GONE);
             checkout_shipping_email.setVisibility(View.GONE);
             checkout_shipping_phone.setVisibility(View.GONE);
-            checkout_shipping_country.setVisibility(View.GONE);
         }
 
         float shippingCost_float = ((float) shippingCost) / 100;
@@ -183,8 +190,15 @@ public class CheckoutActivity extends AppCompatActivity {
                     checkout_shipping_state.setText(checkout_billing_state.getText());
                     checkout_shipping_email.setText(checkout_billing_email.getText());
                     checkout_shipping_phone.setText(checkout_billing_phone.getText());
-                    checkout_shipping_country.setText(checkout_billing_country.getText());
                 }
+            }
+        });
+
+        cancel_order_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CheckoutActivity.this, UserHome.class);
+                startActivity(intent);
             }
         });
     }
@@ -250,7 +264,7 @@ public class CheckoutActivity extends AppCompatActivity {
 //        // Hook up the pay button to the card widget and stripe instance
 //        Button placeOrderBtn = findViewById(R.id.place_order_btn);
 //        placeOrderBtn.setOnClickListener((View view) -> pay());
-        place_order_btn.setOnClickListener(new View.OnClickListener() {
+        place_order_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -259,7 +273,6 @@ public class CheckoutActivity extends AppCompatActivity {
                 String billing_city = checkout_billing_city.getText().toString();
                 String billing_zipCode = checkout_billing_zipCode.getText().toString();
                 String billing_state = checkout_billing_state.getText().toString();
-                String billing_country = checkout_billing_country.getText().toString();
                 String billing_email = checkout_billing_email.getText().toString();
                 String billing_phone = checkout_billing_phone.getText().toString();
 
@@ -268,7 +281,6 @@ public class CheckoutActivity extends AppCompatActivity {
                 String shipping_city = checkout_shipping_city.getText().toString();
                 String shipping_zipCode = checkout_shipping_zipCode.getText().toString();
                 String shipping_state = checkout_shipping_state.getText().toString();
-                String shipping_country = checkout_shipping_country.getText().toString();
                 String shipping_email = checkout_shipping_email.getText().toString();
                 String shipping_phone = checkout_shipping_phone.getText().toString();
 
@@ -291,10 +303,6 @@ public class CheckoutActivity extends AppCompatActivity {
                     checkout_billing_zipCode.setError("This field is required");
                     checkout_billing_zipCode.requestFocus();
                 }
-                else if(billing_country.isEmpty()) {
-                    checkout_billing_country.setError("This field is required");
-                    checkout_billing_country.requestFocus();
-                }
                 else if(billing_email.isEmpty()) {
                     checkout_billing_email.setError("This field is required");
                     checkout_billing_email.requestFocus();
@@ -314,10 +322,6 @@ public class CheckoutActivity extends AppCompatActivity {
                 else if(shipping_zipCode.isEmpty() && checkout_shipping_zipCode.getVisibility() == View.VISIBLE) {
                     checkout_shipping_zipCode.setError("This field is required");
                     checkout_shipping_zipCode.requestFocus();
-                }
-                else if(shipping_country.isEmpty() && checkout_shipping_country.getVisibility() == View.VISIBLE) {
-                    checkout_shipping_country.setError("This field is required");
-                    checkout_shipping_country.requestFocus();
                 }
                 else if(shipping_email.isEmpty() && checkout_shipping_email.getVisibility() == View.VISIBLE) {
                     checkout_shipping_email.setError("This field is required");
@@ -370,7 +374,6 @@ public class CheckoutActivity extends AppCompatActivity {
                     + "\"line2\":\"" + checkout_billing_apt.getText().toString() + "\","
                     + "\"postal_code\":\"" + checkout_billing_zipCode.getText().toString() + "\","
                     + "\"state\":\"" + checkout_billing_state.getText().toString() + "\","
-                    + "\"country\":\"" + checkout_billing_country.getText().toString() + "\","
                     + "\"isSavingCard\":false"
                     + "}";
         } else {

@@ -225,19 +225,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/checkout_billing_country_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/checkout_billing_country"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Country"
-                    android:text="United States"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/checkout_billing_email_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -258,7 +245,7 @@
                     android:id="@+id/checkout_billing_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Phone" />
+                    android:hint="Phone (optional)" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
@@ -347,19 +334,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/checkout_shipping_country_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/checkout_shipping_country"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Country"
-                    android:text="United States"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/checkout_shipping_email_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -380,17 +354,33 @@
                     android:id="@+id/checkout_shipping_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Phone" />
+                    android:hint="Phone (optional)" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/place_order_btn"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-        android:text="Place Order"
-        android:textStyle="bold"/>
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/place_order_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Checkout"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/cancel_order_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
 </RelativeLayout>

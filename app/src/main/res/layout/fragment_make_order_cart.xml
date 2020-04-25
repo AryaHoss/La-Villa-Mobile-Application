@@ -104,12 +104,31 @@
             android:textStyle="bold"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/checkout_btn"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
-        android:text="Checkout"
-        android:textStyle="bold"/>
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/checkout_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Checkout"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/cancel_checkout_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
 </RelativeLayout>
