@@ -1,6 +1,7 @@
 package edu.csulb.cecs.lavilla.ui.makeorder.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Map;
 
 public class RestaurantOrder implements Serializable {
@@ -12,6 +13,8 @@ public class RestaurantOrder implements Serializable {
     private String locationId;
     private String orderMethod;
     private Map<String, String> shippingAddress;
+    private Date purchaseDate;
+    private String orderId;
 
     public RestaurantOrder() {
     }
@@ -22,6 +25,22 @@ public class RestaurantOrder implements Serializable {
         this.locationId = locationId;
         this.orderMethod = orderMethod;
         this.total = total;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+    
+    public Date getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(Date date) {
+        this.purchaseDate = date;
     }
 
     public String getUserId() {

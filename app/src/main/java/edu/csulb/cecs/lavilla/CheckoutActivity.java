@@ -35,10 +35,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Item;
+import edu.csulb.cecs.lavilla.ui.makeorder.Data.Order;
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.RestaurantOrder;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -442,8 +445,6 @@ public class CheckoutActivity extends AppCompatActivity {
                                 stripe.handleNextActionForPayment(activity, paymentIntentClientSecret));
                     } else {
                         activity.addOrderToFirebase();
-                        activity.displayAlert("Payment succeeded",
-                                paymentIntentClientSecret, true);
                     }
                 }
 
@@ -466,8 +467,14 @@ public class CheckoutActivity extends AppCompatActivity {
             orderDetail.setShippingAddress(shippingAddress);
         }
         orderDetail.setTotal(total);
-        orderDetail.setStatus("submitted");
+        orderDetail.setStatus("Received");
+        orderDetail.setOrderId(orderID);
+        orderDetail.setPurchaseDate(Calendar.getInstance().getTime());
         orderReference.child(orderID).setValue(orderDetail);
+
+        Intent intent = new Intent(CheckoutActivity.this, OrderActivity.class);
+        intent.putExtra("orderId", orderDetail.getOrderId());
+        startActivity(intent);
     }
 
     private void displayAlert(@NonNull String title, @NonNull String message, boolean restartDemo) {
