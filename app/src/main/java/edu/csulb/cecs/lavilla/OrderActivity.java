@@ -116,6 +116,7 @@ public class OrderActivity extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
-
+        Intent intent_home = new Intent(OrderActivity.this, UserHome.class);
+        startActivity(intent_home);
     }
 }
