@@ -29,10 +29,10 @@ import edu.csulb.cecs.lavilla.ui.makeorder.adapters.LocationsAdapter;
 
 
 public class MakeOrderLocations extends Fragment {
-    ListView locationsListView;
+    private ListView locationsListView;
     ArrayList<Location> locations;
-    LocationsAdapter locationsAdapter ;
-    MakeOrderViewModel  mViewModel;
+    private LocationsAdapter locationsAdapter ;
+    private MakeOrderViewModel  mViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

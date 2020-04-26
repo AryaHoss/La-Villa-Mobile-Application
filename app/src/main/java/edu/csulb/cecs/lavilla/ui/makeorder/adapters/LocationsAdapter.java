@@ -19,7 +19,7 @@ public class LocationsAdapter extends ArrayAdapter<Location>{
 
     private static final String TAG =  "LocationsAdapter";
     private Context mContext;
-    int resource;
+    private int resource;
 
     public LocationsAdapter(@NonNull Context context, int resource, @NonNull List<Location> objects) {
         super(context, resource,  objects);

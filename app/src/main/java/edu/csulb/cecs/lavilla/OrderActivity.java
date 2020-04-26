@@ -112,4 +112,10 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed()
+    {
+
+    }
 }
