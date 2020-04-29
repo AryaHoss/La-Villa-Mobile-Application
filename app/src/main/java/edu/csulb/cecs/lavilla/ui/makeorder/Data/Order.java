@@ -25,6 +25,10 @@ public class Order implements Serializable {
         this.address = address;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
     private Address address;
 
 

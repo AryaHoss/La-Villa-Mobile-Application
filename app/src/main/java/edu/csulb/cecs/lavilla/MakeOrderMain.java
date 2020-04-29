@@ -17,7 +17,6 @@ public class MakeOrderMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
-        System.out.println(" make order main initialize context!!!!");
         setContentView(R.layout.activity_make_order_main);
 
 

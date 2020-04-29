@@ -31,9 +31,8 @@ public class UserMenuAdapter extends RecyclerView.Adapter<UserMenuHolder> {
     @Override
     public void onBindViewHolder(@NonNull UserMenuHolder holder, int position) {
 
-        holder.mTitle.setText(models.get(position).getTitle());
+        holder.mTitle.setText(models.get(position).getName());
         holder.mDes.setText(models.get(position).getDescription());
-        holder.mImageView.setImageResource(models.get(position).getImg());
 
     }
 
