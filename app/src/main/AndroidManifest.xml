@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name=".OrderActivity"></activity>
+        <activity android:name=".practice.CheckUpdateList"></activity>
+        <activity android:name=".UserOrderHistory" />
+        <activity android:name=".OrderActivity" />
         <activity android:name=".UserAccountEdit" />
         <activity android:name=".LookupMenu" />
         <activity android:name=".SignupActivity" />
