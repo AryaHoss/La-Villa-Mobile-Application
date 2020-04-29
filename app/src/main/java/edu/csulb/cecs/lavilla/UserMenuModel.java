@@ -1,15 +1,19 @@
 package edu.csulb.cecs.lavilla;
 
 public class UserMenuModel {
-    private String title, description;
-    private int img;
+    private String name, description;
 
-    public String getTitle() {
-        return title;
+    public UserMenuModel(){
+
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -20,11 +24,5 @@ public class UserMenuModel {
         this.description = description;
     }
 
-    public int getImg() {
-        return img;
-    }
 
-    public void setImg(int img) {
-        this.img = img;
-    }
 }

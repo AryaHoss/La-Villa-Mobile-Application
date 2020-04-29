@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
+import edu.csulb.cecs.lavilla.practice.CheckUpdateList;
+
 public class UserHome extends AppCompatActivity {
     LinearLayout account_btn;
     LinearLayout order_btn;
@@ -43,7 +45,7 @@ public class UserHome extends AppCompatActivity {
         menu_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UserHome.this, LookupMenu.class));
+                startActivity(new Intent(UserHome.this, CheckUpdateList.class));
             }
         });
 
