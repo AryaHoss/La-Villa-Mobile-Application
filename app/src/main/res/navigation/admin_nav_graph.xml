@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/admin_nav_graph"
+    app:startDestination="@id/adminMainHome">
+
+    <fragment
+        android:id="@+id/adminOrderLocation"
+        android:name="edu.csulb.cecs.lavilla.adminOrderLocation"
+        android:label="adminOrderLocation" >
+        <action
+            android:id="@+id/orderLocationToViewInProgress"
+            app:destination="@id/viewOrdersInProgress" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminStatusUpdate"
+        android:name="edu.csulb.cecs.lavilla.AdminStatusUpdate"
+        android:label="fragment_admin_status_update"
+        tools:layout="@layout/fragment_admin_status_update" />
+    <fragment
+        android:id="@+id/viewOrdersInProgress"
+        android:name="edu.csulb.cecs.lavilla.viewOrdersInProgress"
+        android:label="fragment_view_orders_in_progress"
+        tools:layout="@layout/fragment_view_orders_in_progress" >
+        <action
+            android:id="@+id/inProgressToStatusUpdate"
+            app:destination="@id/adminStatusUpdate" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminMainHome"
+        android:name="edu.csulb.cecs.lavilla.AdminMainHome"
+        android:label="fragment_admin_main_home"
+        tools:layout="@layout/fragment_admin_main_home" >
+        <action
+            android:id="@+id/homeToLocation"
+            app:destination="@id/adminOrderLocation" />
+    </fragment>
+</navigation>
