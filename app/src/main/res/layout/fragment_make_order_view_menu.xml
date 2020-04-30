@@ -8,22 +8,20 @@
     <ListView
         android:id="@+id/menu_items_listview"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/make_order_menu_buttons_layout"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"/>
+        android:layout_height="600dp"
+        android:layout_marginTop="10dp"
+        />
 
 
     <LinearLayout
         android:id="@+id/make_order_menu_buttons_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/menu_items_listview"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
         android:orientation="horizontal">
 
         <Button
@@ -32,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Go to Cart"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/menu_cancel_button"
@@ -40,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cancel"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -16,15 +16,18 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.csulb.cecs.lavilla.ui.makeorder.Data.AdminViewModel;
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Item;
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Location;
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Locations;
+import edu.csulb.cecs.lavilla.ui.makeorder.Data.RestaurantOrder;
 import edu.csulb.cecs.lavilla.ui.makeorder.MakeOrderViewModel;
 import edu.csulb.cecs.lavilla.ui.makeorder.adapters.LocationsAdapter;
 
@@ -35,11 +38,11 @@ import java.util.ArrayList;
 
 import edu.csulb.cecs.lavilla.ui.makeorder.adapters.LocationsAdapter;
 
-public class adminOrderLocation extends Fragment {
+public class adminOrderLocations extends Fragment {
     ListView locationsListView;
     ArrayList<Location> locations;
     LocationsAdapter locationsAdapter;
-    MakeOrderViewModel mViewModel;
+    AdminViewModel mViewModel;
 
 
 
@@ -55,37 +58,40 @@ public class adminOrderLocation extends Fragment {
 
         LocationDataHandler locationDataHandler = new LocationDataHandler(getContext());
         DatabaseReference h =  FirebaseDatabase.getInstance().getReference();
-        mViewModel = new ViewModelProvider(getActivity()).get(MakeOrderViewModel.class);
+        mViewModel = new ViewModelProvider(getActivity()).get(AdminViewModel.class);
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.activity_view_locations, container, false);
-        locationsListView = (ListView) view.findViewById(R.id.view_locations);
-
-        System.out.println("calling get all locations");
-
-        locationDataHandler.getAllLocations(new LocationDataHandler.FirebaseCallBack() {
+        View view = inflater.inflate(R.layout.fragment_admin_order_location, container, false);
+        locationsListView = (ListView) view.findViewById(R.id.admin_locations);
+        String adminId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        locationDataHandler.getManagedLoactions(adminId, new LocationDataHandler.FirebaseCallBack() {
             @Override
-            public void getLocationMethod(Location location) { }
+            public void getLocationMethod(Location location) {            }
 
             @Override
-            public void getAllLocationMethod(List<Location> locations) {
-
-                locationsAdapter = new LocationsAdapter(getContext(), R.layout.locations_adapter_view_layout , locations);
+            public void getAllLocationMethod(List<Location> allLocations) {
+                locationsAdapter = new LocationsAdapter(getContext(), R.layout.locations_adapter_view_layout , allLocations);
                 locationsListView.setAdapter(locationsAdapter);
                 locationsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    //Before navigating to next fragment, viewModel gets the items from Firebase
-                    //so theyre ready to display on the next fragment
+
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        NavController navController = Navigation.findNavController(getActivity(), R.id.view_locations);
-                        Location locationSelected = locations.get(position);
+                        NavController navController = Navigation.findNavController(getActivity(), R.id.admin_nav_host);
+                        Location locationSelected = allLocations.get(position);
                         mViewModel.setLocation(locationSelected);
-                        mViewModel.getMenuItens(itemList -> navController.navigate(R.id.action_makeOrderLocations_to_makeOrderViewMenu));
+                        mViewModel.getOrdersFromSelectedLocation(locationSelected, new AdminViewModel.FirebaseCallBack() {
+                            @Override
+                            public void callBack(ArrayList<RestaurantOrder> orders) {
+                                navController.navigate(R.id.action_locations_to_locationOrders);
+                            }
+                        });
+
 
                     }
                 });
             }
         });
+
 
 
 

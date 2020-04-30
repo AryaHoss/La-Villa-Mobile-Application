@@ -6,8 +6,29 @@
     tools:context=".viewOrdersInProgress">
 
 
+    <TextView
+        android:layout_marginTop="50dp"
+        android:id="@+id/orders_managed_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Orders in progress"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp"
+        />
+
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/view_orders" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/orders_managed_title"
+        android:layout_marginTop="10dp"
+        android:id="@+id/managed_orders_in_progress" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/managed_orders_in_progress"
+        android:text="HELLOOO"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        />
 </RelativeLayout>

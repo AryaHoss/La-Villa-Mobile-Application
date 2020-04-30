@@ -1,11 +1,14 @@
 package edu.csulb.cecs.lavilla;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.Location;
+import edu.csulb.cecs.lavilla.ui.makeorder.MakeOrderViewModel;
 
 public class LocationDataHandler extends ViewModel {
     private DatabaseReference database;
@@ -70,6 +74,34 @@ public class LocationDataHandler extends ViewModel {
 
     public void removeLocation(String rest_id){
         this.database.child("locations").child(rest_id).removeValue();
+    }
+
+    public void getManagedLoactions(String uid, final FirebaseCallBack firebaseCallback){
+        List<Location> managedLocations = new ArrayList<>();
+        Query query = database.child("locationsManaged").child(uid);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d("TAG", "onChildAdded: "+dataSnapshot.getKey());
+                for(DataSnapshot locationSnapshot: dataSnapshot.getChildren()){
+                    Log.d("TAG", "location-->: "+locationSnapshot.getKey());
+
+                    Location loc = locationSnapshot.getValue(Location.class);
+                    System.out.println("location!!!!! ----->>>>"+loc.getCity()+ "    "+ loc.getStreet());
+                    managedLocations.add(loc);
+                    Log.d("TAG", "locationsize: "+managedLocations.size());
+
+                }
+                firebaseCallback.getAllLocationMethod(managedLocations);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        }
+        );
+
     }
 
     public void removeAllLocations(){

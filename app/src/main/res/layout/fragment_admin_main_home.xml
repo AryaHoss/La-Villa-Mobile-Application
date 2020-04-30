@@ -9,14 +9,15 @@
     tools:context=".AdminMainHome">
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="105dp"
+        android:id="@+id/welcome_textview"
+        android:layout_width="wrap_content"
         android:layout_height="52dp"
-        android:layout_marginStart="152dp"
         android:layout_marginTop="72dp"
-        android:text="Admin"
+        android:text="Welcome"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity= "center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -25,20 +26,24 @@
         android:layout_height="53dp"
         android:layout_marginStart="132dp"
         android:layout_marginTop="408dp"
+        android:backgroundTint="#C84949"
+        android:textColor="#ffff"
         android:text="Sign Out"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/viewLocation_btn"
-        android:layout_width="167dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="308dp"
-        android:text="View Location"
+        android:layout_width="319dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="164dp"
+        android:text="View Managed Locations"
+        android:backgroundTint="#017766"
+        android:textColor="#FFFF"
+        android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

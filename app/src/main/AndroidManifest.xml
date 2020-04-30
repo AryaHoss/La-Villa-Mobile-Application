@@ -19,7 +19,7 @@
         <activity android:name=".LookupMenu" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".UserHome" />
-        <activity android:name=".AdminView" />
+        <activity android:name=".AdminMainHome" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".CheckoutActivity" />
         <activity android:name=".MakeOrderMain" />
