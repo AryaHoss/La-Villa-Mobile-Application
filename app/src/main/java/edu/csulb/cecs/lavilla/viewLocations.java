@@ -1,7 +1,7 @@
 package edu.csulb.cecs.lavilla;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.firebase.FirebaseApp;
@@ -29,18 +28,25 @@ import edu.csulb.cecs.lavilla.ui.makeorder.Data.Locations;
 import edu.csulb.cecs.lavilla.ui.makeorder.MakeOrderViewModel;
 import edu.csulb.cecs.lavilla.ui.makeorder.adapters.LocationsAdapter;
 
+import android.os.Bundle;
+import android.widget.ListView;
 
-public class MakeOrderLocations extends Fragment {
-    private ListView locationsListView;
+import java.util.ArrayList;
+
+import edu.csulb.cecs.lavilla.ui.makeorder.adapters.LocationsAdapter;
+
+public class viewLocations extends Fragment {
+    ListView locationsListView;
     ArrayList<Location> locations;
-    private LocationsAdapter locationsAdapter ;
-    private MakeOrderViewModel  mViewModel;
-    private Button cancel_order_button;
+    LocationsAdapter locationsAdapter;
+    MakeOrderViewModel mViewModel;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //setContentView(R.layout.activity_view_locations);
     }
 
     @Override
@@ -52,9 +58,8 @@ public class MakeOrderLocations extends Fragment {
         mViewModel = new ViewModelProvider(getActivity()).get(MakeOrderViewModel.class);
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_make_order_locations, container, false);
-        locationsListView = (ListView) view.findViewById(R.id.makeorder_locatioms);
-        cancel_order_button = (Button) view.findViewById(R.id.location_cancel_button);
+        View view = inflater.inflate(R.layout.activity_view_locations, container, false);
+        locationsListView = (ListView) view.findViewById(R.id.view_locations);
 
         System.out.println("calling get all locations");
 
@@ -72,7 +77,7 @@ public class MakeOrderLocations extends Fragment {
                     //Before navigating to next fragment, viewModel gets the items from Firebase
                     //so theyre ready to display on the next fragment
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        NavController navController = Navigation.findNavController(getActivity(), R.id.make_order_navHost);
+                        NavController navController = Navigation.findNavController(getActivity(), R.id.view_locations);
                         Location locationSelected = locations.get(position);
                         mViewModel.setLocation(locationSelected);
                         mViewModel.getMenuItens(itemList -> navController.navigate(R.id.action_makeOrderLocations_to_makeOrderViewMenu));
@@ -82,15 +87,8 @@ public class MakeOrderLocations extends Fragment {
             }
         });
 
-        cancel_order_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Todo check whether user has payment method and implement logic
-                //mViewModel.postOrder();
-                Intent intent = new Intent(getActivity(), UserHome.class);
-                startActivity(intent);
-            }
-        });
+
+
 
         return view;
     }
@@ -112,6 +110,7 @@ public class MakeOrderLocations extends Fragment {
         super.onDetach();
 
     }
+
 
 
 }

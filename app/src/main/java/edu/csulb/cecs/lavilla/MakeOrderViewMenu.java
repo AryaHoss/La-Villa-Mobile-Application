@@ -1,6 +1,7 @@
 package edu.csulb.cecs.lavilla;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -28,9 +29,9 @@ import edu.csulb.cecs.lavilla.ui.makeorder.adapters.MenuItemAdapter;
 
 public class MakeOrderViewMenu extends Fragment {
 
-    ListView menuItemsListView;
-    MenuItemAdapter itemsAdapter;
-    MakeOrderViewModel mViewModel;
+    private ListView menuItemsListView;
+    private MenuItemAdapter itemsAdapter;
+    private MakeOrderViewModel mViewModel;
 
     public MakeOrderViewMenu() {
         // Required empty public constructor
@@ -77,6 +78,17 @@ public class MakeOrderViewMenu extends Fragment {
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(getActivity(), R.id.make_order_navHost);
                 navController.navigate(R.id.action_makeOrderViewMenu_to_makeOrderCart);
+            }
+        });
+
+        Button cancel_order_button = view.findViewById(R.id.menu_cancel_button);
+        cancel_order_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Todo check whether user has payment method and implement logic
+                //mViewModel.postOrder();
+                Intent intent = new Intent(getActivity(), UserHome.class);
+                startActivity(intent);
             }
         });
 

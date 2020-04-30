@@ -1,34 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="7dp"
+    app:cardCornerRadius="12dp"
+    android:elevation="90dp"
+    android:background="#A9A9A9">
 
-    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/item_name"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:text="@string/itemname" />
+        <ImageView
+            android:id="@+id/item_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:src="@mipmap/ic_launcher_round"/>
 
-    <TextView
-        android:id="@+id/item_price"
-        android:layout_width="90dp"
-        android:layout_height="40dp"
-        android:inputType="number"
-        android:gravity="center"
+        <LinearLayout
+            android:id="@+id/item_info_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/item_img"
+            android:layout_toStartOf="@+id/add_subtract_buttons_layout"
+            android:layout_marginStart="20dp"
+            android:orientation="vertical">
 
-        android:text="@string/_0_0" />
+            <TextView
+                android:id="@+id/item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/itemname"
+                android:textSize="24sp"
+                android:textColor="@color/cardview_dark_background" />
 
-    <TextView
-        android:id="@+id/item_quantity"
-        android:layout_width="90dp"
-        android:layout_height="40dp"
-        android:gravity="center"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-        android:inputType="number"
-        android:text="@string/_0" />
-</LinearLayout>
+                <TextView
+                    android:id="@+id/item_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="40dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:text="@string/_0_0"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/qtyLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:gravity="center"
+                    android:textColor="@color/cardview_dark_background"
+                    android:text="Qty"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/item_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/cardview_dark_background"
+                    android:text="@string/_0"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

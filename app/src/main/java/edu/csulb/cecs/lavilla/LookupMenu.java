@@ -33,15 +33,13 @@ public class LookupMenu extends AppCompatActivity {
         ArrayList<UserMenuModel> models = new ArrayList<>();
 
         UserMenuModel m = new UserMenuModel();
-        m.setTitle("Tacos");
+        m.setName("Tacos");
         m.setDescription("Al Pastor in corn tortilla topped with onion and cilantro");
-        m.setImg(R.drawable.tacos);
         models.add(m);
 
         m = new UserMenuModel();
-        m.setTitle("Burrito");
+        m.setName("Burrito");
         m.setDescription("Rice, Beans, Cheese, and Andilloue Sausage, wrapped in a flour tortilla");
-        m.setImg(R.drawable.burrito);
         models.add(m);
 
         return models;
