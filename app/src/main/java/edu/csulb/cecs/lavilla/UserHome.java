@@ -24,6 +24,7 @@ public class UserHome extends AppCompatActivity {
     LinearLayout account_btn;
     LinearLayout order_btn;
     LinearLayout menu_btn;
+    LinearLayout history_btn;
 
 
     @Override
@@ -34,11 +35,19 @@ public class UserHome extends AppCompatActivity {
         account_btn = findViewById(R.id.manage_account);
         order_btn = findViewById(R.id.order_btn);
         menu_btn = findViewById(R.id.menu_lookup);
+        history_btn = findViewById(R.id.view_orderHistory);
 
         account_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(UserHome.this, UserAccountEdit.class));
+            }
+        });
+
+        order_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserHome.this, MakeOrderMain.class));
             }
         });
 
@@ -49,12 +58,16 @@ public class UserHome extends AppCompatActivity {
             }
         });
 
-        order_btn.setOnClickListener(new View.OnClickListener(){
+        history_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    startActivity(new Intent(UserHome.this, MakeOrderMain.class));
+                startActivity(new Intent(UserHome.this, UserOrderHistory.class));
             }
         });
+
+
+
+
     }
 
     @Override
