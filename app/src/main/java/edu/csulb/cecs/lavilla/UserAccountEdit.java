@@ -26,7 +26,7 @@ public class UserAccountEdit extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
-    private TextView editFname, setFname;
+    private EditText editFname, editLname,editEmail;
     private Button access;
     private String updatedFname;
 
@@ -37,26 +37,47 @@ public class UserAccountEdit extends AppCompatActivity {
         setContentView(R.layout.activity_user_account_edit);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        /*editFname = findViewById(R.id.email_tv);
-        setFname = findViewById(R.id.email_et);
-        access = findViewById(R.id.set_button);*/
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference ref = firebaseDatabase.getReference("Users");
+        editFname = findViewById(R.id.fname_edit);
+        editLname = findViewById(R.id.lname_edit);
+        editEmail = findViewById(R.id.email_edit_accountEt);
+        access = findViewById(R.id.edit_accountbtn);
 
         ref.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                editFname.setText(user.getfname());
+                editFname.setHint(user.getfname());
+                editLname.setHint(user.getlname());
+                editEmail.setHint(user.getEmail());
 
                 access.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        String eFname = editFname.getText().toString().trim();
+                        String eLname = editLname.getText().toString().trim();
+                        String eEmail = editEmail.getText().toString().trim();
 
-                        changefName(setFname.getText().toString().trim());
+                        if(!(eFname.isEmpty() || eFname.length() == 0 || eFname.equals("") || eFname == null)){
+                            changefName(eFname);
+                        }
+
+                        if(!(eLname.isEmpty() || eLname.length() == 0 || eLname.equals("") || eLname == null)){
+                            changelName(eLname);
+                        }
+
+                        if(!(eEmail.isEmpty() || eEmail.length() == 0 || eEmail.equals("") || eEmail == null)){
+                            changeEmail(eEmail);
+                        }
+                        else{
+                            Toast.makeText(UserAccountEdit.this,"Field Not Edited",Toast.LENGTH_SHORT).show();
+                        }
+
 
                     }
                 });
