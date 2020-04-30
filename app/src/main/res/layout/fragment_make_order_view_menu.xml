@@ -5,29 +5,42 @@
     android:layout_height="match_parent"
     tools:context=".MakeOrderViewMenu">
 
-    <Button
-        android:gravity="center_horizontal"
-        android:textAlignment="center"
-
-        android:id="@+id/goto_cart_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:background="#26708E"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
-        android:textColor="#FFFFFF"
-        android:textFontWeight="@integer/config_navAnimTime"
-
-        android:text="Go To Cart" />
-
     <ListView
         android:id="@+id/menu_items_listview"
         android:layout_width="wrap_content"
-        android:layout_height="558dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/make_order_menu_buttons_layout"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/goto_cart_btn"
-        android:layout_marginBottom="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
 
-        />
+
+    <LinearLayout
+        android:id="@+id/make_order_menu_buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/goto_cart_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Go to Cart"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/menu_cancel_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
 </RelativeLayout>

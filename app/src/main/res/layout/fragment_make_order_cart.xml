@@ -69,8 +69,9 @@
     <ListView
         android:id="@+id/cart_listview"
         android:layout_width="match_parent"
-        android:layout_height="296dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/line1"
+        android:layout_above="@+id/sub_total_title_layout"
         android:layout_marginTop="16dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="20dp"
@@ -80,7 +81,7 @@
         android:id="@+id/sub_total_title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cart_listview"
+        android:layout_above="@+id/make_order_cart_buttons_layout"
         android:layout_margin="20dp"
         android:orientation="horizontal">
 
@@ -106,6 +107,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/make_order_cart_buttons_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -114,29 +116,21 @@
         android:layout_marginEnd="5dp"
         android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/checkout_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Checkout"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/cancel_checkout_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:textStyle="bold"/>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/checkout_button"
-        android:layout_width="177dp"
-        android:layout_height="36dp"
-        android:layout_below="@+id/sub_total_title_layout"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="55dp"
-        android:layout_weight="1"
-        android:text="Checkout"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/cancel_checkout_button"
-        android:layout_width="178dp"
-        android:layout_height="35dp"
-        android:layout_below="@+id/sub_total_title_layout"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="55dp"
-        android:layout_toEndOf="@+id/checkout_button"
-        android:layout_weight="1"
-        android:text="Cancel"
-        android:textStyle="bold" />
 
 </RelativeLayout>

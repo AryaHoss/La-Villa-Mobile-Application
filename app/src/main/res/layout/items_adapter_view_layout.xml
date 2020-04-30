@@ -10,72 +10,75 @@
     android:background="#A9A9A9">
 
     <RelativeLayout
-        android:layout_width="444dp"
-        android:layout_height="100dp"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/item_img"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-
+            android:layout_alignParentStart="true"
             android:gravity="center"
-            android:src="@mipmap/ic_launcher_round"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_name" />
+            android:src="@mipmap/ic_launcher_round"/>
 
-        <TextView
-            android:id="@+id/item_name"
+        <LinearLayout
+            android:id="@+id/item_info_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="130dp"
-            android:gravity="center"
-            android:text="@string/itemname"
-            android:textSize="24sp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/cardview_dark_background"
-            />
+            android:layout_toEndOf="@+id/item_img"
+            android:layout_toStartOf="@+id/add_subtract_buttons_layout"
+            android:layout_marginStart="20dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/item_price"
-            android:layout_width="91dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/item_name"
-            android:layout_marginStart="130dp"
-            android:layout_marginTop="19dp"
-            android:gravity="center"
-            android:textColor="@color/cardview_dark_background"
-            android:inputType="number"
-            android:text="@string/_0_0"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/itemname"
+                android:textSize="24sp"
+                android:textColor="@color/cardview_dark_background" />
 
-        <TextView
-            android:id="@+id/qtyLabel"
-            android:layout_width="58dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/item_name"
-            android:layout_marginStart="270dp"
-            android:layout_marginTop="19dp"
-            android:gravity="center"
-            android:textColor="@color/cardview_dark_background"
-            android:text="Qty"
-            android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/item_quantity"
-            android:layout_width="52dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/item_name"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="19dp"
-            android:layout_toEndOf="@id/qtyLabel"
-            android:gravity="center"
-            android:inputType="number"
-            android:textColor="@color/cardview_dark_background"
-            android:text="@string/_0"
-            android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/item_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="40dp"
+                    android:textColor="@color/cardview_dark_background"
+                    android:text="@string/_0_0"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/qtyLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:gravity="center"
+                    android:textColor="@color/cardview_dark_background"
+                    android:text="Qty"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/item_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/cardview_dark_background"
+                    android:text="@string/_0"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
 
 

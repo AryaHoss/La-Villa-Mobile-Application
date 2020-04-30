@@ -24,11 +24,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_above="@+id/place_order_btn"
+        android:layout_margin="10dp"
+        android:layout_above="@+id/checkout_buttons_layout"
         android:layout_below="@+id/checkout_title">
 
         <LinearLayout
@@ -252,9 +249,11 @@
                 android:id="@+id/checkout_same_address_linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:orientation="horizontal"
-                android:layout_below="@+id/checkout_title">
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/checkout_shipping_address_title"
@@ -360,6 +359,7 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/checkout_buttons_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

@@ -94,7 +94,7 @@ public class CheckoutActivity extends AppCompatActivity {
         // TODO add more UI
         cardMultilineWidget = findViewById(R.id.card_multiline_widget);
 
-        checkout_shipping_address_title = findViewById(R.id.checkout_billing_address_title);
+        checkout_shipping_address_title = findViewById(R.id.checkout_shipping_address_title);
 
         checkout_billing_address = findViewById(R.id.checkout_billing_address);
         checkout_billing_apt = findViewById(R.id.checkout_billing_apt);
