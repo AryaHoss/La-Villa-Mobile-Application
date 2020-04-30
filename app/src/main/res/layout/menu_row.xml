@@ -15,12 +15,6 @@
 
         >
 
-        <ImageView
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:id="@+id/imageIv"
-            android:src="@drawable/ic_restaurant_menu_orange_24dp" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,8 +23,6 @@
             android:textSize="22sp"
             android:textColor="#000"
             android:textStyle="bold"
-            android:layout_toRightOf="@id/imageIv"
-            android:layout_toEndOf="@id/imageIv"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp" />
 
@@ -41,8 +33,6 @@
             android:id="@+id/descriptionTv"
             android:textSize="18sp"
             android:textColor="#a9a9a9"
-            android:layout_toRightOf="@id/imageIv"
-            android:layout_toEndOf="@id/imageIv"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
