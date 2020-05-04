@@ -12,10 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.AdminViewModel;
 import edu.csulb.cecs.lavilla.ui.makeorder.Data.RestaurantOrder;
@@ -31,7 +37,6 @@ public class viewOrdersInProgress extends Fragment {
     OrdersAdapter ordersAdapter;
     public viewOrdersInProgress() {
 
-        // Required empty public constructor
     }
 
     @Override
@@ -46,15 +51,20 @@ public class viewOrdersInProgress extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_view_orders_in_progress, container, false);
         orderItemsListView = (ListView) view.findViewById(R.id.managed_orders_in_progress);
-        ordersAdapter = new OrdersAdapter(getContext(), R.layout.adapter_orders, mViewModel.getOrders());
+        ordersAdapter = new OrdersAdapter(getContext(), R.layout.adapter_orders, mViewModel.getOrders(), new OrdersAdapter.BtnClickListener() {
+            @Override
+            public void onBtnClick(int position) {
+                setOrderComplete(position);
+            }
+        });
+
         List<RestaurantOrder> orderstest = mViewModel.getOrders();
-        Log.d("adapter", "created adapter ");
         orderItemsListView.setAdapter(ordersAdapter);
-        Log.d("adapter", "set adapter ");
 
         orderItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("adapter", "set clickmlisteners");
                 RestaurantOrder orderSelected = mViewModel.getOrders().get(position);
                 mViewModel.setOrderSelected(orderSelected);
 
@@ -62,8 +72,16 @@ public class viewOrdersInProgress extends Fragment {
                 controller.navigate(R.id.action_orders_to_orderInfo);
             }
         });
-        Log.d("adapter", "set clickmlisteners");
-
         return view;
+    }
+
+    public void setOrderComplete(int position){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        RestaurantOrder order = mViewModel.getOrders().get(position);
+        order.setStatus("Completed");
+        Log.d("TAG", "Order clicked:" + order.getOrderId() +" " + order.getTotal());
+        Map<String, Object> update = new HashMap<>();
+        update.put("/Orders/"+order.getOrderId(), order);
+        ref.updateChildren(update);
     }
 }

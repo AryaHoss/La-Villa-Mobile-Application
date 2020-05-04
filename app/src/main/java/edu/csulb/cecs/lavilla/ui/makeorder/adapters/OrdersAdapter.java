@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,11 +26,13 @@ public class OrdersAdapter extends ArrayAdapter<RestaurantOrder> {
 
     private Context mContext;
     int resource;
+    BtnClickListener btnClickListener;
 
-    public OrdersAdapter(@NonNull Context context, int resource, @NonNull List<RestaurantOrder> objects) {
+    public OrdersAdapter(@NonNull Context context, int resource, @NonNull List<RestaurantOrder> objects, BtnClickListener listener) {
         super(context, resource, objects);
         this.mContext = context;
         this.resource = resource;
+        btnClickListener = listener;
     }
 
     @Override
@@ -45,13 +48,23 @@ public class OrdersAdapter extends ArrayAdapter<RestaurantOrder> {
         TextView orderNumberTV = (TextView) convertView.findViewById(R.id.order_number_label);
         TextView itemQtyTV = (TextView) convertView.findViewById(R.id.order_items_qty);
         TextView orderTotalTV = (TextView) convertView.findViewById(R.id.order_total);
+        Button completeOrderBtn = (Button) convertView.findViewById(R.id.complete_order_button);
+        completeOrderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(btnClickListener != null){
+                    btnClickListener.onBtnClick(position);
+                }
+            }
+        });
 
-
-        orderNumberTV.setText(position);
-        itemQtyTV.setText(orderQty);
+        orderNumberTV.setText(Integer.toString(position+1));
+        itemQtyTV.setText(Integer.toString(orderQty));
         orderTotalTV.setText("$"+Integer.toString(total));
         return convertView;
     }
 
-
+    public interface BtnClickListener {
+        public abstract void onBtnClick(int position);
+    }
 }

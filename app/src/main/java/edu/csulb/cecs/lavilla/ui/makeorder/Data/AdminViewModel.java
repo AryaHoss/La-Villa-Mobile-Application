@@ -45,7 +45,7 @@ public class AdminViewModel extends ViewModel {
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d("TAG", "onDataChange: ");
+                orders.clear();
                 for (DataSnapshot order: dataSnapshot.getChildren()) {
                     RestaurantOrder o = order.getValue(RestaurantOrder.class);
                     orders.add(o);

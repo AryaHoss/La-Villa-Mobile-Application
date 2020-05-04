@@ -74,7 +74,6 @@ public class adminOrderLocations extends Fragment {
                 locationsListView.setAdapter(locationsAdapter);
                 locationsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         NavController navController = Navigation.findNavController(getActivity(), R.id.admin_nav_host);
                         Location locationSelected = allLocations.get(position);

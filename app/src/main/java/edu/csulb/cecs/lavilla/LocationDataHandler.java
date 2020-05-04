@@ -53,7 +53,7 @@ public class LocationDataHandler extends ViewModel {
     public void getAllLocations(final FirebaseCallBack firebaseCallBack){
         final List<Location> allLocations = new ArrayList<>();
         Query ref = database.child("locations");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 allLocations.clear();
