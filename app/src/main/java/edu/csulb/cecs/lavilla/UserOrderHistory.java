@@ -51,7 +51,7 @@ public class UserOrderHistory extends AppCompatActivity {
                     orderHolder.setTotal(rOrder.getTotal());
                 }
                 else{
-                    orderHolder.view.setVisibility(View.GONE);
+                    orderHolder.hide();
                 }
 
             }
@@ -94,6 +94,13 @@ public class UserOrderHistory extends AppCompatActivity {
 
 
             post_desc.setText(format);
+        }
+
+        public void hide(){
+            RecyclerView.LayoutParams param = (RecyclerView.LayoutParams)view.getLayoutParams();
+            param.height = 0;
+            view.setVisibility(View.GONE);
+
         }
 
     }
