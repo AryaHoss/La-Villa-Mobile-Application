@@ -36,6 +36,5 @@ public class ExampleInstrumentedTest {
         myModel.readData();
         System.out.println(myModel.printData());
 
-
     }
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -43,10 +44,15 @@ public class UserOrderHistory extends AppCompatActivity {
         FirebaseRecyclerAdapter<RestaurantOrder, UserOrderHistory.HistoryHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<RestaurantOrder, UserOrderHistory.HistoryHolder>(RestaurantOrder.class,R.layout.order_history_row, UserOrderHistory.HistoryHolder.class,mDatabase) {
             @Override
             protected void populateViewHolder(UserOrderHistory.HistoryHolder orderHolder, RestaurantOrder rOrder, int i) {
-                orderHolder.setOrder(rOrder.getOrderId());
-                orderHolder.setLocationId(rOrder.getLocationId());
-                orderHolder.setStatus(rOrder.getStatus());
-                orderHolder.setTotal(rOrder.getTotal());
+                if(rOrder.getUserId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                    orderHolder.setOrder(rOrder.getOrderId());
+                    orderHolder.setLocationId(rOrder.getLocationId());
+                    orderHolder.setStatus(rOrder.getStatus());
+                    orderHolder.setTotal(rOrder.getTotal());
+                }
+                else{
+                    orderHolder.view.setVisibility(View.GONE);
+                }
 
             }
         };
