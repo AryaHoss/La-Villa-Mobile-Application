@@ -28,17 +28,19 @@ public class MainActivity extends AppCompatActivity {
         rest_hours = findViewById(R.id.rest_hours);
         rest_address = findViewById(R.id.rest_address);
         rest_name = findViewById(R.id.rest_name);
-
+        final RestaurantModel[] retrieved = {new RestaurantModel()};
         vm.fetchData(new ViewModelMock.FireBaseCallBack() {  // this interface is the one Brandon and I will be using to handle the UI
             @Override
             public void saveDataInterfaceMethod(RestaurantModel rm, RestaurantModel dest) {
                 dest = rm;
+                retrieved[0] = dest;
                 System.out.println(rm.toString());
                 rest_phone.setText(rm.getPhoneNumber());
                 rest_hours.setText(rm.getHours());
                 rest_address.setText(rm.getAddress());
             }
         });
+        System.out.println(retrieved[0].toString());
 
     }
 
